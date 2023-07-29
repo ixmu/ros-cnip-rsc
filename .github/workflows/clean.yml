@@ -27,6 +27,6 @@ jobs:
       - name: Clean
         env:
           GITHUB_REPO: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
           EXPIRE_TIME: '7d'
         run: pipenv run python run.py
