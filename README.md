@@ -21,7 +21,7 @@ IP地址搬运自[苍狼](https://ispip.clang.cn/all_cn_cidr.txt)CNIP cidr列表
 
 ###### 在/System Script下添加如下脚本内容
 ```
-/tool fetch url="https://gh.10105410.xyz//https://raw.githubusercontent.com/ixmu/ros-cnip-rsc/main/cnip.rsc"
+/tool fetch url="https://fastraw.ixnic.net/ixmu/ros-cnip-rsc/main/cnip.rsc"
 /system logging disable 0
 /import cnip.rsc
 /system logging enable 0
