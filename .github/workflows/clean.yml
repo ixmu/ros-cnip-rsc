@@ -14,7 +14,7 @@ jobs:
       with:
        token: ${{ secrets.ACTION_TOKEN }}
        repo: user/repo
-       workflow_id: TheWorkflow.yml
+#       workflow_id: cnip.yml
        branch: main
        run_conclusions: |
         failure
