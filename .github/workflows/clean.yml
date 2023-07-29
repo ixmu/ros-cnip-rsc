@@ -14,7 +14,7 @@ jobs:
       with:
        token: ${{ secrets.ACTION_TOKEN }}
        repo: ixmu/ros-cnip-rsc
-       workflow_id: cnip.yml
+       workflow_id: cnip.yml,clean.yml
        branch: main
        run_conclusions: |
           failure
