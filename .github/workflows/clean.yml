@@ -14,13 +14,13 @@ jobs:
        - name: Delete workflow runs
          uses: dmvict/clean-workflow-runs@v1.0.0
           with:
-    token: ${{ secrets.PRIVATE_GITHUB_TOKEN }}
+    token: ${{ secrets.ACTION_TOKEN }}
     repo: user/repo
-    workflow_id: TheWorkflow.yml
+    workflow_id: 
     branch: main
     run_conclusions: |
       failure
       timed_out
-    save_period: 30
+    save_period: 7
     save_min_runs_number: 1
     dry: true
