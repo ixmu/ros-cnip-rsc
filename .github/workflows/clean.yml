@@ -6,20 +6,19 @@ on:
   schedule:
     - cron: '15 9 */7 * *'
 jobs:
-  build:
-    if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id
-    runs-on: Ubuntu-20.04
-
-       - name: Delete workflow runs
-  uses: dmvict/clean-workflow-runs@v1.0.0
-  with:
-    token: ${{ secrets.PRIVATE_GITHUB_TOKEN }}
-    repo: user/repo
-    workflow_id: TheWorkflow.yml
-    branch: main
-    run_conclusions: |
-      failure
-      timed_out
-    save_period: 30
-    save_min_runs_number: 1
-    dry: true
+  delete_runs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Delete workflow runs
+      uses: dmvict/clean-workflow-runs@v1.0.0
+      with:
+       token: ${{ secrets.PRIVATE_GITHUB_TOKEN }}
+       repo: user/repo
+       workflow_id: TheWorkflow.yml
+       branch: main
+       run_conclusions: |
+        failure
+        timed_out
+       save_period: 30
+       save_min_runs_number: 1
+       dry: true
