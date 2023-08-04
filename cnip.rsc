@@ -6219,9 +6219,11 @@ add address=159.27.0.0/16 list=CNIP
 add address=159.27.0.0/17 list=CNIP
 add address=159.27.128.0/26 list=CNIP
 add address=159.27.128.64/28 list=CNIP
+add address=159.27.128.80/30 list=CNIP
 add address=159.27.132.0/25 list=CNIP
-add address=159.27.132.128/28 list=CNIP
-add address=159.27.132.144/29 list=CNIP
+add address=159.27.132.128/27 list=CNIP
+add address=159.27.132.160/28 list=CNIP
+add address=159.27.132.176/30 list=CNIP
 add address=159.27.144.0/20 list=CNIP
 add address=159.27.160.0/21 list=CNIP
 add address=159.27.168.0/22 list=CNIP
