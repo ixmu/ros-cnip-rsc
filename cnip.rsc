@@ -5869,7 +5869,7 @@ add address=119.44.220.0/22 list=CNIP
 add address=119.44.224.0/24 list=CNIP
 add address=119.44.23.0/24 list=CNIP
 add address=119.44.24.0/23 list=CNIP
-add address=119.44.255.0/24 list=CNIP
+add address=119.44.254.0/23 list=CNIP
 add address=119.44.4.0/23 list=CNIP
 add address=119.44.45.0/24 list=CNIP
 add address=119.44.46.0/24 list=CNIP
