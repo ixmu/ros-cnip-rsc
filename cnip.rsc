@@ -6759,7 +6759,6 @@ add address=139.159.64.0/19 list=CNIP
 add address=139.159.96.0/20 list=CNIP
 add address=139.170.0.0/16 list=CNIP
 add address=139.176.0.0/16 list=CNIP
-add address=139.177.148.0/24 list=CNIP
 add address=139.183.0.0/16 list=CNIP
 add address=139.186.0.0/16 list=CNIP
 add address=139.189.0.0/16 list=CNIP
@@ -11264,7 +11263,6 @@ add address=42.123.40.0/21 list=CNIP
 add address=42.123.48.0/20 list=CNIP
 add address=42.123.64.0/18 list=CNIP
 add address=42.128.0.0/12 list=CNIP
-add address=42.129.0.0/16 list=CNIP
 add address=42.156.0.0/19 list=CNIP
 add address=42.156.128.0/17 list=CNIP
 add address=42.156.36.0/22 list=CNIP
