@@ -8170,6 +8170,7 @@ add address=202.27.136.0/23 list=CNIP
 add address=202.27.14.0/24 list=CNIP
 add address=202.3.128.0/23 list=CNIP
 add address=202.36.226.0/24 list=CNIP
+add address=202.37.93.0/24 list=CNIP
 add address=202.38.0.0/22 list=CNIP
 add address=202.38.0.0/23 list=CNIP
 add address=202.38.128.0/21 list=CNIP
