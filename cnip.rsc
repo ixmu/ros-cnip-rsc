@@ -3433,7 +3433,6 @@ add address=103.48.148.0/22 list=CNIP
 add address=103.48.152.0/22 list=CNIP
 add address=103.48.156.0/22 list=CNIP
 add address=103.48.160.0/21 list=CNIP
-add address=103.48.171.0/24 list=CNIP
 add address=103.48.202.0/23 list=CNIP
 add address=103.48.216.0/21 list=CNIP
 add address=103.48.216.0/22 list=CNIP
