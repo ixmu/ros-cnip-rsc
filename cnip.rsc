@@ -6942,7 +6942,6 @@ add address=147.243.30.128/27 list=CNIP
 add address=147.243.30.64/26 list=CNIP
 add address=147.78.132.0/22 list=CNIP
 add address=148.70.0.0/16 list=CNIP
-add address=149.115.120.0/22 list=CNIP
 add address=149.115.124.0/24 list=CNIP
 add address=149.127.218.0/24 list=CNIP
 add address=149.129.37.128/28 list=CNIP
