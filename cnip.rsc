@@ -3240,7 +3240,7 @@ add address=103.43.124.0/22 list=CNIP
 add address=103.43.132.0/22 list=CNIP
 add address=103.43.140.0/22 list=CNIP
 add address=103.43.16.0/22 list=CNIP
-add address=103.43.173.0/24 list=CNIP
+add address=103.43.172.0/23 list=CNIP
 add address=103.43.175.0/24 list=CNIP
 add address=103.43.184.0/22 list=CNIP
 add address=103.43.192.0/21 list=CNIP
@@ -13315,7 +13315,7 @@ add address=52.80.0.0/14 list=CNIP
 add address=52.80.0.0/15 list=CNIP
 add address=52.82.0.0/15 list=CNIP
 add address=52.82.0.0/17 list=CNIP
-add address=52.82.128.0/24 list=CNIP
+add address=52.82.128.0/23 list=CNIP
 add address=52.82.131.0/24 list=CNIP
 add address=52.82.132.0/24 list=CNIP
 add address=52.82.134.0/23 list=CNIP
