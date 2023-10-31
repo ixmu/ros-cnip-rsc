@@ -34,8 +34,8 @@ jobs:
         clang="$(curl -kLfsm 5 https://ispip.clang.cn/all_cn.txt)"
         gaoyifan="$(curl -kLfsm 5 https://raw.githubusercontent.com/gaoyifan/china-operator-ip/ip-lists/china.txt)"
         iplist="$qqwry\n$ipipnet\n$clang\n$gaoyifan"
-        echo -e "${iplist}" | sort | uniq | sed -e 's/^/add address=/g' -e 's/$/ list=CNIP/g' | sed -e $'1i\\\n/ip firewall address-list' -e $'1i\\\nremove [/ip firewall address-list find list=CNIP]' > /tmp/cnip.rsc
-        cp cnip.rsc.defconfig cnip.rsc && cat /tmp/cnip.rsc > cnip.rsc
+        echo -e "${iplist}" | sort | uniq | sed -e 's/^/add address=/g' -e 's/$/ list=CNIP/g' > /tmp/cnip.rsc
+        cp cnip.rsc.defconfig cnip.rsc && cat /tmp/cnip.rsc >> cnip.rsc
         echo -e "${iplist}" | sort | uniq > china_ip_list.txt
 
     - name: Apply
