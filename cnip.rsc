@@ -4523,7 +4523,6 @@ add address=103.99.52.0/22 list=CNIP
 add address=103.99.56.0/22 list=CNIP
 add address=103.99.60.0/22 list=CNIP
 add address=103.99.76.0/22 list=CNIP
-add address=104.167.16.0/20 list=CNIP
 add address=104.192.108.0/23 list=CNIP
 add address=104.192.110.0/24 list=CNIP
 add address=104.193.88.0/23 list=CNIP
@@ -12220,7 +12219,7 @@ add address=43.229.40.0/22 list=CNIP
 add address=43.229.48.0/22 list=CNIP
 add address=43.229.56.0/22 list=CNIP
 add address=43.229.96.0/22 list=CNIP
-add address=43.230.10.0/23 list=CNIP
+add address=43.230.11.0/24 list=CNIP
 add address=43.230.124.0/22 list=CNIP
 add address=43.230.136.0/22 list=CNIP
 add address=43.230.136.0/24 list=CNIP
