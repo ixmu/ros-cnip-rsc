@@ -29,9 +29,8 @@ jobs:
         
     - name: Combine
       run: |
-        ipipnet="$( curl -kLfsm 5 https://raw.githubusercontent.com/17mon/china_ip_list/master/china_ip_list.txt )"
         clang="$( curl -kLfsm 5 https://ispip.clang.cn/all_cn_cidr.txt )"
-        iplist="$ipipnet\n$clang"
+        iplist="$clang"
         echo -e "${iplist}" | sort | uniq | sed -e 's/^/add address=/g' -e 's/$/ list=CNIP/g' > /tmp/cnip.rsc
         cp -f cnip.rsc.defconfig cnip.rsc && cat /tmp/cnip.rsc >> cnip.rsc
         echo -e "${iplist}" | sort | uniq > china_ip_list.txt
