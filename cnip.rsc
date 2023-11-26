@@ -3,12 +3,12 @@ remove [/ip firewall address-list find list=CNIP]
 add address=10.0.0.0/8 list=CNIP comment=private-network
 add address=172.16.0.0/12 list=CNIP comment=private-network
 add address=192.168.0.0/16 list=CNIP comment=private-network
-add address=20.255.62.222/32 list=CNIP comment=cloudvps-ip
-add address=20.210.104.186/32 list=CNIP comment=cloudvps-ip
-add address=152.69.196.58/32 list=CNIP comment=cloudvps-ip
-add address=193.123.226.193/32 list=CNIP comment=cloudvps-ip
-add address=158.179.165.136/32 list=CNIP comment=cloudvps-ip
-add address=1.0.1.0/24 list=CNIP
+add address=20.255.62.222/32 list=CNIP comment=cloudvps-ip-azhk
+add address=20.210.104.186/32 list=CNIP comment=cloudvps-ip-azjp
+add address=152.69.196.58/32 list=CNIP comment=cloudvps-ip-ocjp
+add address=193.123.226.193/32 list=CNIP comment=cloudvps-ip-ocse
+add address=158.179.165.136/32 list=CNIP comment=cloudvps-ip-occc
+add address=129.154.219.233/32 list=CNIP comment=cloudvps-ip-ocsearmadd address=1.0.1.0/24 list=CNIP
 add address=1.0.2.0/23 list=CNIP
 add address=1.0.32.0/19 list=CNIP
 add address=1.0.8.0/21 list=CNIP
