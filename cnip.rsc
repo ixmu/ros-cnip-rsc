@@ -8,7 +8,9 @@ add address=20.210.104.186/32 list=CNIP comment=cloudvps-ip-azjp
 add address=152.69.196.58/32 list=CNIP comment=cloudvps-ip-ocjp
 add address=193.123.226.193/32 list=CNIP comment=cloudvps-ip-ocse
 add address=158.179.165.136/32 list=CNIP comment=cloudvps-ip-occc
-add address=129.154.219.233/32 list=CNIP comment=cloudvps-ip-ocsearmadd address=1.0.1.0/24 list=CNIP
+add address=129.154.219.233/32 list=CNIP comment=cloudvps-ip-ocsearm
+add address=160.251.141.76 list=CNIP comment=cloudvps-ip-conoha
+add address=1.0.1.0/24 list=CNIP
 add address=1.0.2.0/23 list=CNIP
 add address=1.0.32.0/19 list=CNIP
 add address=1.0.8.0/21 list=CNIP
