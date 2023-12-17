@@ -1,8 +1,4 @@
-# ROS-cnip-script
-
-此列表代码搬运自[kiddin9/china_ip_list](https://github.com/kiddin9/china_ip_list)
-
-搬运自 www.tcp5.com 列表，加入ROS的导入命令制作而成。
+# ROS-cnip-script搬运自 www.tcp5.com 列表，加入ROS的导入命令制作而成。
 
 
 >此列表仅包含IPV4地址，没有IPV6地址。
