@@ -29,11 +29,7 @@ jobs:
         
     - name: Combine
       run: |
-        clang="$( curl -kLfsm 5 https://ispip.clang.cn/all_cn_cidr.txt )"
-        iplist="$clang"
-        echo -e "${iplist}" | sort | uniq | sed -e 's/^/add address=/g' -e 's/$/ list=CNIP/g' > /tmp/cnip.rsc
-        cp -f cnip.rsc.defconfig cnip.rsc && cat /tmp/cnip.rsc >> cnip.rsc
-        echo -e "${iplist}" | sort | uniq > china_ip_list.txt
+        bash script/update.sh
 
     - name: Apply
       run: |
