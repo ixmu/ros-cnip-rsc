@@ -2,7 +2,7 @@
 
 此列表代码搬运自[kiddin9/china_ip_list](https://github.com/kiddin9/china_ip_list)
 
-IP地址搬运自[苍狼](https://ispip.clang.cn/all_cn_cidr.txt)CNIP cidr列表，加入ROS的导入命令制作而成。
+搬运自 www.tcp5.com 列表，加入ROS的导入命令制作而成。
 
 
 >此列表仅包含IPV4地址，没有IPV6地址。
@@ -21,12 +21,12 @@ IP地址搬运自[苍狼](https://ispip.clang.cn/all_cn_cidr.txt)CNIP cidr列表
 
 ###### 在/System Script下添加如下脚本内容
 ```
-/tool fetch url="https://fastraw.ixnic.net/ixmu/ros-cnip-rsc/main/cnip.rsc"
+/tool fetch url="https://fastraw.ixnic.net/ixmu/ros-cnip-rsc/main/all_china.rsc"
 /system logging disable 0
-/import cnip.rsc
+/import all_china.rsc
 /system logging enable 0
-:local CNIP [:len [/ip firewall address-list find list="CNIP"]]
+:local List_ALL_China [:len [/ip firewall address-list find list="List_ALL_China"]]
 /file remove [find name="cnip.rsc"]
-:log info ("CNIP列表更新:"."$CNIP"."条规则")
+:log info ("List_ALL_China列表更新:"."$List_ALL_China"."条规则")
 ```
 建议手动执行，也可以在/System Scheduler下添加一个脚本定时
