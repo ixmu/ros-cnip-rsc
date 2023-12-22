@@ -1,4 +1,4 @@
-#ChinaTelecom   2023-12-20-12
+#ChinaTelecom   2023-12-21-12
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -1951,7 +1951,9 @@ add address=202.143.100.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=202.149.224.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=202.152.176.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=202.158.160.0/19 comment="" disabled=no list=List_ChinaTelecom
-add address=202.170.216.0/21 comment="" disabled=no list=List_ChinaTelecom
+add address=202.170.217.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=202.170.218.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=202.170.220.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=202.173.224.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=202.181.124.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=202.189.0.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -1975,7 +1977,13 @@ add address=203.15.0.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=203.25.48.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=203.25.208.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=203.32.48.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=203.32.203.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=203.32.204.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=203.32.212.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=203.33.4.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=203.33.7.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=203.33.21.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=203.33.26.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=203.33.32.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=203.33.64.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=203.33.67.0/24 comment="" disabled=no list=List_ChinaTelecom
