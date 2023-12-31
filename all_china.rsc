@@ -10,7 +10,7 @@ add address=193.123.226.193/32 list=List_ALL_China comment=cloudvps-ip-ocse
 add address=158.179.165.136/32 list=List_ALL_China comment=cloudvps-ip-occc
 add address=129.154.219.233/32 list=List_ALL_China comment=cloudvps-ip-ocsearm
 add address=160.251.141.76 list=List_ALL_China comment=cloudvps-ip-conoha
-#ALL_China   2023-12-29-12
+#ALL_China   2023-12-30-12
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -3277,7 +3277,8 @@ add address=211.99.96.0/20 comment="" disabled=no list=List_ALL_China
 add address=211.99.112.0/22 comment="" disabled=no list=List_ALL_China
 add address=211.99.116.0/24 comment="" disabled=no list=List_ALL_China
 add address=211.99.122.0/24 comment="" disabled=no list=List_ALL_China
-add address=211.99.128.0/17 comment="" disabled=no list=List_ALL_China
+add address=211.99.128.0/18 comment="" disabled=no list=List_ALL_China
+add address=211.99.192.0/19 comment="" disabled=no list=List_ALL_China
 add address=211.100.0.0/17 comment="" disabled=no list=List_ALL_China
 add address=211.100.192.0/20 comment="" disabled=no list=List_ALL_China
 add address=211.100.224.0/19 comment="" disabled=no list=List_ALL_China

@@ -1,4 +1,4 @@
-#ChinaUnicom   2023-12-29-12
+#ChinaUnicom   2023-12-30-12
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -1750,7 +1750,7 @@ add address=211.99.112.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=211.99.116.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=211.99.122.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=211.99.188.0/23 comment="" disabled=no list=List_ChinaUnicom
-add address=211.99.192.0/18 comment="" disabled=no list=List_ChinaUnicom
+add address=211.99.192.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=211.100.192.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=211.100.224.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=211.101.0.0/18 comment="" disabled=no list=List_ChinaUnicom
@@ -1789,7 +1789,6 @@ add address=211.148.184.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=211.148.187.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=211.148.188.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=211.148.192.0/19 comment="" disabled=no list=List_ChinaUnicom
-add address=211.150.64.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=211.151.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=211.152.0.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=211.152.57.0/24 comment="" disabled=no list=List_ChinaUnicom
@@ -1818,7 +1817,6 @@ add address=211.156.216.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=211.156.220.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=211.156.223.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=211.157.0.0/19 comment="" disabled=no list=List_ChinaUnicom
-add address=211.157.128.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=211.158.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=211.160.0.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=211.160.4.0/24 comment="" disabled=no list=List_ChinaUnicom
