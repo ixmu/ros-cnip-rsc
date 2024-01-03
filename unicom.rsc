@@ -1,4 +1,4 @@
-#ChinaUnicom   2024-01-01-12
+#ChinaUnicom   2024-01-02-12
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
