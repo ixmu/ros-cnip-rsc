@@ -1,4 +1,4 @@
-#ChinaUnicom   2024-01-03-12
+#ChinaUnicom   2024-01-04-12
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -484,7 +484,7 @@ add address=103.59.124.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.59.148.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.59.164.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.60.236.0/22 comment="" disabled=no list=List_ChinaUnicom
-add address=103.61.61.0/24 comment="" disabled=no list=List_ChinaUnicom
+add address=103.61.60.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.61.153.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=103.61.154.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=103.61.189.0/24 comment="" disabled=no list=List_ChinaUnicom
@@ -628,6 +628,7 @@ add address=103.212.0.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=103.212.4.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.212.12.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.214.48.0/22 comment="" disabled=no list=List_ChinaUnicom
+add address=103.214.64.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=103.218.216.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.219.32.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=103.219.92.0/24 comment="" disabled=no list=List_ChinaUnicom
@@ -1872,7 +1873,7 @@ add address=218.60.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=218.62.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=218.67.128.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=218.68.0.0/15 comment="" disabled=no list=List_ChinaUnicom
-add address=218.96.64.0/24 comment="" disabled=no list=List_ChinaUnicom
+add address=218.96.64.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=218.96.107.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=218.96.108.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=218.97.30.0/24 comment="" disabled=no list=List_ChinaUnicom
