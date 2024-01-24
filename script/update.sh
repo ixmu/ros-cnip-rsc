@@ -7,7 +7,7 @@ curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/mobile$(date -d "yesterd
 curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/cernet$(date -d "yesterday" "+%Y-%m-%d")-12.rsc > /tmp/cernet.rsc
 curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/other$(date -d "yesterday" "+%Y-%m-%d")-12.rsc > /tmp/other.rsc
 
-cat ./script/cnip.rsc.defconfig /tmp/all_china.rsc > all_china.rsc
+cat /tmp/all_china.rsc > all_china.rsc
 cat /tmp/telecom.rsc > telecom.rsc
 cat /tmp/unicom.rsc > unicom.rsc
 cat /tmp/mobile.rsc > mobile.rsc
