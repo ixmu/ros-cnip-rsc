@@ -19,6 +19,8 @@
 ```
 /tool fetch url="https://fastraw.ixnic.net/ixmu/ros-cnip-rsc/main/all_china.rsc"
 /system logging disable 0
+/ip firewall address-list
+remove [find list=List_ALL_China]
 /import all_china.rsc
 /system logging enable 0
 :local List_ALL_China [:len [/ip firewall address-list find list="List_ALL_China"]]
