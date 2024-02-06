@@ -16,7 +16,7 @@ while true; do
 done
 
 if [ "$hour" -eq 25 ]; then
-  exit 0
+  exit 1
 fi
 
 curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/all_china$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/all_china.rsc
