@@ -19,12 +19,12 @@ if [ "$hour" -eq 25 ]; then
   exit 1
 fi
 
-curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/all_china$(date -d "yesterday" "+%Y-%m-%d").rsc > /tmp/all_china.rsc
-curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/telecom$(date -d "yesterday" "+%Y-%m-%d").rsc > /tmp/telecom.rsc
-curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/unicom$(date -d "yesterday" "+%Y-%m-%d").rsc > /tmp/unicom.rsc
-curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/mobile$(date -d "yesterday" "+%Y-%m-%d").rsc > /tmp/mobile.rsc
-curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/cernet$(date -d "yesterday" "+%Y-%m-%d").rsc > /tmp/cernet.rsc
-curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/other$(date -d "yesterday" "+%Y-%m-%d").rsc > /tmp/other.rsc
+curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/all_china$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/all_china.rsc
+curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/telecom$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/telecom.rsc
+curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/unicom$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/unicom.rsc
+curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/mobile$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/mobile.rsc
+curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/cernet$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/cernet.rsc
+curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/other$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/other.rsc
 
 cat /tmp/all_china.rsc > all_china.rsc
 cat /tmp/telecom.rsc > telecom.rsc
