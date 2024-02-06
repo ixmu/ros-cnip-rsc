@@ -8,7 +8,7 @@ while true; do
     break
   fi
 
-  status_code=$(curl -s -o /dev/null -w "%{http_code}" http://www.tcp5.com/list/$(date "+%Y.%m")/all_china${timeout}-${hour}.rsc)
+  status_code=$(curl -s -o /dev/null -w "%{http_code}" http://www.tcp5.com/list/$(date "+%Y.%m")/all_china$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc)
 
   if [ "$status_code" -eq 200 ]; then
     break
