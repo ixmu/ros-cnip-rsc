@@ -25,6 +25,7 @@ while true; do
 
   if [ "$status_code" -eq 200 ]; then
     update_ip
+    break
   else
     hour=$((hour + 1))
   fi
