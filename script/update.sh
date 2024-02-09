@@ -19,6 +19,7 @@ hour=0
 while true; do
   if [ "$hour" -gt 24 ]; then
     break
+    exit 1
   fi
 
   status_code=$(curl -s -o /dev/null -w "%{http_code}" http://www.tcp5.com/list/$(date "+%Y.%m")/all_china$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc)
