@@ -22,8 +22,8 @@
 remove [find list=List_ALL_China]
 /import all_china.rsc
 /system logging enable 0
-:local List_ALL_China [:len [/ip firewall address-list find list="List_ALL_China"]]
+:local ListAllChina [:len [/ip firewall address-list find list="List_ALL_China"]]
 /file remove [find name="cnip.rsc"]
-:log info ("List_ALL_China列表更新:"."$List_ALL_China"."条规则")
+:log info ("List_ALL_China列表更新:"."$ListAllChina"."条规则")
 ```
 建议手动执行，也可以在/System Scheduler下添加一个脚本定时
