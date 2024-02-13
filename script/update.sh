@@ -15,7 +15,7 @@ update_ip () {
   cat /tmp/other.rsc > other.rsc
 }
 update_ip_v6 () {
-  curl -kLfsm 5 https://raw.githubusercontent.com/ChanthMiao/China-IPv6-List/release/cn6.txt | sed -e 's/^/add address/' -e 's/$/ comment=\"\" disabled\=no list\=List_ALL_China/'>/tmp/all_china_v6.rsc
+  curl -kLfsm 5 https://raw.githubusercontent.com/ChanthMiao/China-IPv6-List/release/cn6.txt | sed -e 's/^/add address=/' -e 's/$/ comment=\"\" disabled\=no list\=List_ALL_China/'>/tmp/all_china_v6.rsc
   cat /tmp/all_china_v6.rsc > all_china_v6.rsc
 }
 hour=0
