@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # 年.月
-path=`date "+%Y.%m"`
-filename=`date -d "+%Y-%m-%d"`
+path=$(date "+%Y-%m-%d")
+filename=$(date -d "+%Y-%m-%d")
 
 curl -kLfsm 5 http://www.tcp5.com/list/${path}/all_china${filename}-05.rsc > all_china.rsc
 curl -kLfsm 5 http://www.tcp5.com/list/${path}/telecom${filename}-05.rsc > telecom.rsc
