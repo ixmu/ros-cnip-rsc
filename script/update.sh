@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 年.月
-path=$(date "+%Y-%m")
+path=$(date "+%Y.%m")
 filename=$(date "+%Y-%m-%d")
 
 curl -kLfsm 5 http://www.tcp5.com/list/${path}/all_china${filename}-05.rsc > all_china.rsc
