@@ -7,6 +7,7 @@ update_ip () {
   curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/mobile$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/mobile.rsc
   curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/cernet$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/cernet.rsc
   curl -kLfsm 5 http://www.tcp5.com/list/$(date "+%Y.%m")/other$(date -d "yesterday" "+%Y-%m-%d")-${hour}.rsc > /tmp/other.rsc
+  rm all_china.rsc telecom.rsc unicom.rsc mobile.rsc cernet.rsc other.rsc
   cat /tmp/all_china.rsc > all_china.rsc
   cat /tmp/telecom.rsc > telecom.rsc
   cat /tmp/unicom.rsc > unicom.rsc
