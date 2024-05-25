@@ -1,39 +1,26 @@
 name: ROS CNIP list
 
-on: 
+on:
   workflow_dispatch:
-  #push: 
-  #   branches:
-  #     - master
-  watch:
-    types: started
   schedule:
-    - cron: 1 1 * * *
+    - cron: 0 4 */3 * *
 
 jobs:
-  build:
-    if: github.event.repository.owner.id == github.event.sender.id || ! github.event.sender.id
-    runs-on: Ubuntu-20.04
-
+  ROS-IP-UPDATE:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-
-    - name: Set git identity
-      run : |
-        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        sudo timedatectl set-timezone "Asia/Shanghai"
-        
-    - name: Combine
-      run: |
-        bash script/update.sh
-
-    - name: Apply
-      run: |
-        Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
-        git add .
-        git commit -m "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
-        git push -f
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.REPO_TOKEN }}
+      - name: ros_cn_ip_update
+        run: |
+          bash script/update.sh
+      - name: Push
+        id: list-push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update ros-cnip-rsc
+          skip_dirty_check: false
+          commit_user_name: Action Bot
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: Action <actions@github.com>
