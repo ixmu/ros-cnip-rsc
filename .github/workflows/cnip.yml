@@ -3,7 +3,7 @@ name: ROS CNIP list
 on:
   workflow_dispatch:
   schedule:
-    - cron: 30 12 * * *
+    - cron: 30 6 * * *
 
 jobs:
   ROS-IP-UPDATE:
