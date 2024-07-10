@@ -1,4 +1,4 @@
-#ChinaTelecom   2024-07-09-05
+#ChinaTelecom   2024-07-10-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -182,7 +182,7 @@ add address=43.241.51.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.241.180.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.242.72.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.242.96.0/23 comment="" disabled=no list=List_ChinaTelecom
-add address=43.242.192.0/21 comment="" disabled=no list=List_ChinaTelecom
+add address=43.242.196.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.242.204.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.242.252.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.243.12.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -582,7 +582,6 @@ add address=103.37.46.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.37.72.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.37.100.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.37.172.0/22 comment="" disabled=no list=List_ChinaTelecom
-add address=103.38.76.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.38.84.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.38.116.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.38.252.0/23 comment="" disabled=no list=List_ChinaTelecom
@@ -701,7 +700,6 @@ add address=103.90.189.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.90.190.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.92.88.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.93.204.0/22 comment="" disabled=no list=List_ChinaTelecom
-add address=103.94.12.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.96.214.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.96.224.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.97.60.0/24 comment="" disabled=no list=List_ChinaTelecom
