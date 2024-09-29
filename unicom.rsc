@@ -1,4 +1,4 @@
-#ChinaUnicom   2024-09-28-05
+#ChinaUnicom   2024-09-29-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -794,6 +794,8 @@ add address=110.52.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=110.72.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=110.75.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=110.76.0.0/18 comment="" disabled=no list=List_ChinaUnicom
+add address=110.76.192.0/18 comment="" disabled=no list=List_ChinaUnicom
+add address=110.77.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=110.172.213.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=110.173.192.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=110.228.0.0/14 comment="" disabled=no list=List_ChinaUnicom
@@ -1066,6 +1068,7 @@ add address=119.18.207.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=119.18.208.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=119.23.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=119.27.64.0/18 comment="" disabled=no list=List_ChinaUnicom
+add address=119.31.192.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=119.32.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=119.34.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=119.36.0.0/16 comment="" disabled=no list=List_ChinaUnicom
@@ -1718,7 +1721,7 @@ add address=210.74.108.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=210.74.128.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=210.75.96.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=210.75.192.0/19 comment="" disabled=no list=List_ChinaUnicom
-add address=210.76.32.0/19 comment="" disabled=no list=List_ChinaUnicom
+add address=210.76.0.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=210.76.74.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=210.76.77.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=210.76.78.0/24 comment="" disabled=no list=List_ChinaUnicom
