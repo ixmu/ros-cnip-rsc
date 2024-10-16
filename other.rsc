@@ -1,4 +1,4 @@
-#Other_China   2024-10-15-05
+#Other_China   2024-10-16-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -139,8 +139,6 @@ add address=103.14.78.0/24 comment="" disabled=no list=List_Other_China
 add address=103.17.228.0/22 comment="" disabled=no list=List_Other_China
 add address=103.17.240.0/22 comment="" disabled=no list=List_Other_China
 add address=103.20.32.0/22 comment="" disabled=no list=List_Other_China
-add address=103.36.168.0/24 comment="" disabled=no list=List_Other_China
-add address=103.36.172.0/23 comment="" disabled=no list=List_Other_China
 add address=103.37.7.0/24 comment="" disabled=no list=List_Other_China
 add address=103.37.248.0/22 comment="" disabled=no list=List_Other_China
 add address=103.44.58.0/23 comment="" disabled=no list=List_Other_China
@@ -299,7 +297,6 @@ add address=128.1.66.0/24 comment="" disabled=no list=List_Other_China
 add address=128.1.72.0/24 comment="" disabled=no list=List_Other_China
 add address=129.227.193.0/24 comment="" disabled=no list=List_Other_China
 add address=131.221.80.0/23 comment="" disabled=no list=List_Other_China
-add address=139.95.16.0/23 comment="" disabled=no list=List_Other_China
 add address=139.159.104.0/22 comment="" disabled=no list=List_Other_China
 add address=139.198.112.0/23 comment="" disabled=no list=List_Other_China
 add address=139.198.120.0/23 comment="" disabled=no list=List_Other_China
@@ -459,7 +456,7 @@ add address=222.126.176.0/21 comment="" disabled=no list=List_Other_China
 add address=222.126.228.0/23 comment="" disabled=no list=List_Other_China
 add address=222.126.238.0/23 comment="" disabled=no list=List_Other_China
 add address=222.126.244.0/22 comment="" disabled=no list=List_Other_China
-add address=222.126.248.0/22 comment="" disabled=no list=List_Other_China
+add address=222.126.250.0/23 comment="" disabled=no list=List_Other_China
 add address=223.0.1.0/24 comment="" disabled=no list=List_Other_China
 add address=223.0.2.0/24 comment="" disabled=no list=List_Other_China
 add address=223.0.8.0/23 comment="" disabled=no list=List_Other_China
