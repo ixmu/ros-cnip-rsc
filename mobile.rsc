@@ -1,4 +1,4 @@
-#ChinaMobile   2024-10-17-05
+#ChinaMobile   2024-10-18-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -383,8 +383,10 @@ add address=122.49.16.0/20 comment="" disabled=no list=List_ChinaMobile
 add address=122.49.32.0/20 comment="" disabled=no list=List_ChinaMobile
 add address=122.64.0.0/16 comment="" disabled=no list=List_ChinaMobile
 add address=122.70.0.0/15 comment="" disabled=no list=List_ChinaMobile
+add address=122.72.3.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=122.72.16.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=122.72.38.0/24 comment="" disabled=no list=List_ChinaMobile
+add address=122.72.112.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=122.84.0.0/16 comment="" disabled=no list=List_ChinaMobile
 add address=122.90.0.0/16 comment="" disabled=no list=List_ChinaMobile
 add address=122.91.0.0/17 comment="" disabled=no list=List_ChinaMobile
@@ -396,6 +398,7 @@ add address=122.94.224.0/20 comment="" disabled=no list=List_ChinaMobile
 add address=122.115.32.0/19 comment="" disabled=no list=List_ChinaMobile
 add address=122.144.132.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=122.144.157.0/24 comment="" disabled=no list=List_ChinaMobile
+add address=122.144.211.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=122.200.64.0/19 comment="" disabled=no list=List_ChinaMobile
 add address=122.200.96.0/21 comment="" disabled=no list=List_ChinaMobile
 add address=122.200.112.0/21 comment="" disabled=no list=List_ChinaMobile
@@ -627,7 +630,9 @@ add address=223.161.200.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=223.161.206.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=223.161.220.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=223.161.224.0/22 comment="" disabled=no list=List_ChinaMobile
+add address=223.161.230.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=223.161.232.0/23 comment="" disabled=no list=List_ChinaMobile
-add address=223.161.236.0/23 comment="" disabled=no list=List_ChinaMobile
+add address=223.161.236.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=223.161.246.0/23 comment="" disabled=no list=List_ChinaMobile
-add address=223.161.248.0/23 comment="" disabled=no list=List_ChinaMobile
+add address=223.161.248.0/22 comment="" disabled=no list=List_ChinaMobile
+add address=223.161.252.0/23 comment="" disabled=no list=List_ChinaMobile
