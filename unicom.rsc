@@ -1,4 +1,4 @@
-#ChinaUnicom   2025-03-18-05
+#ChinaUnicom   2025-03-19-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -401,7 +401,6 @@ add address=93.183.18.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=101.16.0.0/12 comment="" disabled=no list=List_ChinaUnicom
 add address=101.36.128.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=101.37.0.0/16 comment="" disabled=no list=List_ChinaUnicom
-add address=101.49.206.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=101.50.8.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=101.52.112.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=101.52.124.0/22 comment="" disabled=no list=List_ChinaUnicom
@@ -850,6 +849,7 @@ add address=113.45.104.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=113.45.112.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=113.45.120.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=113.45.128.0/17 comment="" disabled=no list=List_ChinaUnicom
+add address=113.46.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=113.46.128.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=113.46.192.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=113.46.224.0/20 comment="" disabled=no list=List_ChinaUnicom
@@ -1327,7 +1327,6 @@ add address=124.71.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=124.71.128.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=124.71.192.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=124.71.224.0/20 comment="" disabled=no list=List_ChinaUnicom
-add address=124.71.250.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=124.88.0.0/13 comment="" disabled=no list=List_ChinaUnicom
 add address=124.128.0.0/13 comment="" disabled=no list=List_ChinaUnicom
 add address=124.152.0.0/16 comment="" disabled=no list=List_ChinaUnicom
