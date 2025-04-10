@@ -1,4 +1,4 @@
-#ChinaTelecom   2025-04-09-05
+#ChinaTelecom   2025-04-10-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -475,6 +475,8 @@ add address=69.230.192.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=69.231.128.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=69.234.192.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=69.235.128.0/18 comment="" disabled=no list=List_ChinaTelecom
+add address=71.131.192.0/18 comment="" disabled=no list=List_ChinaTelecom
+add address=71.132.0.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=71.136.64.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=71.137.0.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=72.163.240.0/23 comment="" disabled=no list=List_ChinaTelecom
@@ -1757,6 +1759,7 @@ add address=129.28.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=129.204.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=129.211.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=130.36.146.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=131.221.82.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=131.228.96.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=132.232.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=132.237.134.0/24 comment="" disabled=no list=List_ChinaTelecom
@@ -1890,6 +1893,7 @@ add address=161.207.8.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=161.207.16.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=162.14.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=163.47.4.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=163.53.45.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=163.53.60.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=163.53.88.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=163.53.168.0/22 comment="" disabled=no list=List_ChinaTelecom
