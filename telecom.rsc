@@ -1,4 +1,4 @@
-#ChinaTelecom   2025-04-14-05
+#ChinaTelecom   2025-04-15-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -134,7 +134,7 @@ add address=43.225.255.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.32.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.64.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.128.0/19 comment="" disabled=no list=List_ChinaTelecom
-add address=43.226.236.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=43.226.237.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.239.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.56.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.64.0/21 comment="" disabled=no list=List_ChinaTelecom
@@ -161,8 +161,7 @@ add address=43.231.160.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.231.167.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.231.168.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=43.231.170.0/24 comment="" disabled=no list=List_ChinaTelecom
-add address=43.240.1.0/24 comment="" disabled=no list=List_ChinaTelecom
-add address=43.240.2.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=43.240.0.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.240.60.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.240.72.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.240.124.0/24 comment="" disabled=no list=List_ChinaTelecom
@@ -505,6 +504,7 @@ add address=101.50.8.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=101.50.56.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=101.52.4.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=101.52.6.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=101.52.112.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=101.52.116.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=101.52.124.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=101.52.128.0/20 comment="" disabled=no list=List_ChinaTelecom
