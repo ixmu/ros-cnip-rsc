@@ -1,4 +1,4 @@
-#ChinaUnicom   2025-05-16-05
+#ChinaUnicom   2025-05-17-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -1269,10 +1269,12 @@ add address=123.249.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=124.6.64.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=124.14.64.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=124.14.224.0/19 comment="" disabled=no list=List_ChinaUnicom
+add address=124.22.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=124.42.34.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=124.42.49.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=124.42.64.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=124.42.128.0/17 comment="" disabled=no list=List_ChinaUnicom
+add address=124.47.0.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=124.64.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=124.66.0.0/17 comment="" disabled=no list=List_ChinaUnicom
 add address=124.67.0.0/16 comment="" disabled=no list=List_ChinaUnicom
@@ -1438,10 +1440,6 @@ add address=163.177.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=163.179.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=163.204.0.0/16 comment="" disabled=no list=List_ChinaUnicom
 add address=163.244.246.0/24 comment="" disabled=no list=List_ChinaUnicom
-add address=168.159.144.0/21 comment="" disabled=no list=List_ChinaUnicom
-add address=168.159.152.0/22 comment="" disabled=no list=List_ChinaUnicom
-add address=168.159.156.0/23 comment="" disabled=no list=List_ChinaUnicom
-add address=168.159.158.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=168.160.224.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=171.34.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=171.36.0.0/14 comment="" disabled=no list=List_ChinaUnicom
@@ -1525,7 +1523,6 @@ add address=202.60.112.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=202.63.160.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=202.69.16.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=202.75.208.0/21 comment="" disabled=no list=List_ChinaUnicom
-add address=202.76.247.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=202.84.17.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=202.85.208.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=202.89.96.0/24 comment="" disabled=no list=List_ChinaUnicom
@@ -1568,6 +1565,7 @@ add address=202.136.222.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=202.136.255.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=202.148.96.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=202.149.224.0/20 comment="" disabled=no list=List_ChinaUnicom
+add address=202.150.16.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=202.168.160.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=202.170.128.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=202.170.216.0/21 comment="" disabled=no list=List_ChinaUnicom
@@ -1623,6 +1621,7 @@ add address=203.119.192.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=203.130.40.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=203.132.32.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=203.148.64.0/20 comment="" disabled=no list=List_ChinaUnicom
+add address=203.152.64.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=203.166.160.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=203.166.165.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=203.166.166.0/24 comment="" disabled=no list=List_ChinaUnicom
@@ -1711,6 +1710,8 @@ add address=210.77.144.0/20 comment="" disabled=no list=List_ChinaUnicom
 add address=210.77.192.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=210.79.224.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=210.82.0.0/15 comment="" disabled=no list=List_ChinaUnicom
+add address=210.87.129.0/24 comment="" disabled=no list=List_ChinaUnicom
+add address=210.87.132.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=210.192.96.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=210.192.120.0/21 comment="" disabled=no list=List_ChinaUnicom
 add address=211.88.0.0/16 comment="" disabled=no list=List_ChinaUnicom
