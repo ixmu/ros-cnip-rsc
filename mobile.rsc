@@ -1,4 +1,4 @@
-#ChinaMobile   2025-07-18-05
+#ChinaMobile   2025-07-19-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -139,6 +139,7 @@ add address=103.60.236.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.61.60.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.61.104.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.63.244.0/22 comment="" disabled=no list=List_ChinaMobile
+add address=103.83.72.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.87.180.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.90.51.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.90.56.0/23 comment="" disabled=no list=List_ChinaMobile
@@ -150,6 +151,7 @@ add address=103.114.236.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.116.120.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.118.173.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.126.1.0/24 comment="" disabled=no list=List_ChinaMobile
+add address=103.132.80.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.135.196.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.142.96.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.142.154.0/23 comment="" disabled=no list=List_ChinaMobile
@@ -531,7 +533,8 @@ add address=222.126.158.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=222.126.160.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=222.126.164.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=222.126.170.0/24 comment="" disabled=no list=List_ChinaMobile
-add address=222.126.182.0/23 comment="" disabled=no list=List_ChinaMobile
+add address=222.126.180.0/22 comment="" disabled=no list=List_ChinaMobile
+add address=222.126.184.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=222.126.192.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=222.126.196.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=222.126.200.0/22 comment="" disabled=no list=List_ChinaMobile
