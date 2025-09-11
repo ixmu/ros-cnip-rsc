@@ -1,4 +1,4 @@
-#ChinaCerNet   2025-09-10-05
+#ChinaCerNet   2025-09-11-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
