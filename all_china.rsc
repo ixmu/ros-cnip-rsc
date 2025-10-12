@@ -1,4 +1,4 @@
-#ALL_China   2025-10-10-05
+#ALL_China   2025-10-12-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -65,7 +65,6 @@ add address=8.213.176.0/20 comment="" disabled=no list=List_ALL_China
 add address=8.213.251.0/24 comment="" disabled=no list=List_ALL_China
 add address=8.213.253.0/24 comment="" disabled=no list=List_ALL_China
 add address=8.220.192.0/18 comment="" disabled=no list=List_ALL_China
-add address=8.221.0.0/17 comment="" disabled=no list=List_ALL_China
 add address=14.16.0.0/12 comment="" disabled=no list=List_ALL_China
 add address=14.102.227.0/24 comment="" disabled=no list=List_ALL_China
 add address=14.102.234.0/24 comment="" disabled=no list=List_ALL_China
@@ -280,10 +279,8 @@ add address=43.96.8.0/24 comment="" disabled=no list=List_ALL_China
 add address=43.96.10.0/24 comment="" disabled=no list=List_ALL_China
 add address=43.96.34.0/24 comment="" disabled=no list=List_ALL_China
 add address=43.96.67.0/24 comment="" disabled=no list=List_ALL_China
-add address=43.96.74.0/24 comment="" disabled=no list=List_ALL_China
 add address=43.108.0.0/17 comment="" disabled=no list=List_ALL_China
-add address=43.110.0.0/15 comment="" disabled=no list=List_ALL_China
-add address=43.112.0.0/15 comment="" disabled=no list=List_ALL_China
+add address=43.110.0.0/16 comment="" disabled=no list=List_ALL_China
 add address=43.128.0.0/18 comment="" disabled=no list=List_ALL_China
 add address=43.128.192.0/19 comment="" disabled=no list=List_ALL_China
 add address=43.129.0.0/19 comment="" disabled=no list=List_ALL_China
@@ -648,12 +645,11 @@ add address=47.77.128.0/17 comment="" disabled=no list=List_ALL_China
 add address=47.80.0.0/18 comment="" disabled=no list=List_ALL_China
 add address=47.80.128.0/17 comment="" disabled=no list=List_ALL_China
 add address=47.81.0.0/18 comment="" disabled=no list=List_ALL_China
-add address=47.85.0.0/16 comment="" disabled=no list=List_ALL_China
 add address=47.87.6.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.87.41.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.87.42.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.87.64.0/18 comment="" disabled=no list=List_ALL_China
-add address=47.87.216.0/21 comment="" disabled=no list=List_ALL_China
+add address=47.87.220.0/22 comment="" disabled=no list=List_ALL_China
 add address=47.87.224.0/22 comment="" disabled=no list=List_ALL_China
 add address=47.87.236.0/22 comment="" disabled=no list=List_ALL_China
 add address=47.88.0.0/17 comment="" disabled=no list=List_ALL_China
@@ -664,8 +660,7 @@ add address=47.89.102.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.89.104.0/21 comment="" disabled=no list=List_ALL_China
 add address=47.89.122.0/23 comment="" disabled=no list=List_ALL_China
 add address=47.89.124.0/23 comment="" disabled=no list=List_ALL_China
-add address=47.89.128.0/17 comment="" disabled=no list=List_ALL_China
-add address=47.90.128.0/17 comment="" disabled=no list=List_ALL_China
+add address=47.89.192.0/18 comment="" disabled=no list=List_ALL_China
 add address=47.91.32.0/19 comment="" disabled=no list=List_ALL_China
 add address=47.91.96.0/20 comment="" disabled=no list=List_ALL_China
 add address=47.92.0.0/14 comment="" disabled=no list=List_ALL_China
@@ -675,7 +670,6 @@ add address=47.120.0.0/14 comment="" disabled=no list=List_ALL_China
 add address=47.235.5.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.235.8.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.235.12.0/23 comment="" disabled=no list=List_ALL_China
-add address=47.235.16.0/23 comment="" disabled=no list=List_ALL_China
 add address=47.235.20.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.235.22.0/23 comment="" disabled=no list=List_ALL_China
 add address=47.235.28.0/23 comment="" disabled=no list=List_ALL_China
@@ -687,11 +681,8 @@ add address=47.246.84.0/22 comment="" disabled=no list=List_ALL_China
 add address=47.246.92.0/23 comment="" disabled=no list=List_ALL_China
 add address=47.246.122.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.246.124.0/23 comment="" disabled=no list=List_ALL_China
-add address=47.246.128.0/22 comment="" disabled=no list=List_ALL_China
-add address=47.246.136.0/21 comment="" disabled=no list=List_ALL_China
 add address=47.246.152.0/22 comment="" disabled=no list=List_ALL_China
 add address=47.251.0.0/16 comment="" disabled=no list=List_ALL_China
-add address=47.252.0.0/17 comment="" disabled=no list=List_ALL_China
 add address=47.254.0.0/17 comment="" disabled=no list=List_ALL_China
 add address=49.4.0.0/18 comment="" disabled=no list=List_ALL_China
 add address=49.4.64.0/19 comment="" disabled=no list=List_ALL_China
@@ -1475,15 +1466,8 @@ add address=101.237.36.0/22 comment="" disabled=no list=List_ALL_China
 add address=101.237.40.0/24 comment="" disabled=no list=List_ALL_China
 add address=101.237.128.0/20 comment="" disabled=no list=List_ALL_China
 add address=101.240.0.0/14 comment="" disabled=no list=List_ALL_China
-add address=101.245.0.0/22 comment="" disabled=no list=List_ALL_China
-add address=101.245.8.0/23 comment="" disabled=no list=List_ALL_China
-add address=101.245.12.0/22 comment="" disabled=no list=List_ALL_China
-add address=101.245.16.0/21 comment="" disabled=no list=List_ALL_China
-add address=101.245.32.0/19 comment="" disabled=no list=List_ALL_China
-add address=101.245.64.0/18 comment="" disabled=no list=List_ALL_China
-add address=101.245.128.0/22 comment="" disabled=no list=List_ALL_China
-add address=101.245.136.0/22 comment="" disabled=no list=List_ALL_China
-add address=101.245.144.0/22 comment="" disabled=no list=List_ALL_China
+add address=101.245.0.0/17 comment="" disabled=no list=List_ALL_China
+add address=101.245.128.0/18 comment="" disabled=no list=List_ALL_China
 add address=101.246.172.0/22 comment="" disabled=no list=List_ALL_China
 add address=101.246.176.0/20 comment="" disabled=no list=List_ALL_China
 add address=101.247.0.0/18 comment="" disabled=no list=List_ALL_China
@@ -1624,6 +1608,7 @@ add address=103.40.192.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.40.232.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.40.240.0/20 comment="" disabled=no list=List_ALL_China
 add address=103.41.0.0/22 comment="" disabled=no list=List_ALL_China
+add address=103.41.44.0/23 comment="" disabled=no list=List_ALL_China
 add address=103.41.116.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.41.164.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.41.232.0/23 comment="" disabled=no list=List_ALL_China
@@ -1666,8 +1651,7 @@ add address=103.55.172.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.55.228.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.56.32.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.56.60.0/22 comment="" disabled=no list=List_ALL_China
-add address=103.56.76.0/23 comment="" disabled=no list=List_ALL_China
-add address=103.56.79.0/24 comment="" disabled=no list=List_ALL_China
+add address=103.56.76.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.56.100.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.56.104.0/22 comment="" disabled=no list=List_ALL_China
 add address=103.56.152.0/22 comment="" disabled=no list=List_ALL_China
@@ -1885,7 +1869,6 @@ add address=103.163.180.0/24 comment="" disabled=no list=List_ALL_China
 add address=103.164.32.0/23 comment="" disabled=no list=List_ALL_China
 add address=103.164.76.0/23 comment="" disabled=no list=List_ALL_China
 add address=103.165.54.0/23 comment="" disabled=no list=List_ALL_China
-add address=103.165.110.0/23 comment="" disabled=no list=List_ALL_China
 add address=103.166.52.0/23 comment="" disabled=no list=List_ALL_China
 add address=103.169.50.0/23 comment="" disabled=no list=List_ALL_China
 add address=103.169.62.0/23 comment="" disabled=no list=List_ALL_China
@@ -2705,7 +2688,6 @@ add address=117.48.232.0/23 comment="" disabled=no list=List_ALL_China
 add address=117.48.234.0/24 comment="" disabled=no list=List_ALL_China
 add address=117.48.236.0/22 comment="" disabled=no list=List_ALL_China
 add address=117.50.0.0/16 comment="" disabled=no list=List_ALL_China
-add address=117.51.0.0/17 comment="" disabled=no list=List_ALL_China
 add address=117.51.128.0/19 comment="" disabled=no list=List_ALL_China
 add address=117.51.160.0/23 comment="" disabled=no list=List_ALL_China
 add address=117.51.168.0/21 comment="" disabled=no list=List_ALL_China
@@ -3402,15 +3384,12 @@ add address=139.9.224.0/20 comment="" disabled=no list=List_ALL_China
 add address=139.9.240.0/21 comment="" disabled=no list=List_ALL_China
 add address=139.9.248.0/22 comment="" disabled=no list=List_ALL_China
 add address=139.28.48.0/23 comment="" disabled=no list=List_ALL_China
-add address=139.95.0.0/20 comment="" disabled=no list=List_ALL_China
-add address=139.95.18.0/23 comment="" disabled=no list=List_ALL_China
 add address=139.129.0.0/16 comment="" disabled=no list=List_ALL_China
 add address=139.148.0.0/16 comment="" disabled=no list=List_ALL_China
 add address=139.155.0.0/16 comment="" disabled=no list=List_ALL_China
 add address=139.159.0.0/19 comment="" disabled=no list=List_ALL_China
 add address=139.159.32.0/22 comment="" disabled=no list=List_ALL_China
-add address=139.159.96.0/21 comment="" disabled=no list=List_ALL_China
-add address=139.159.108.0/22 comment="" disabled=no list=List_ALL_China
+add address=139.159.96.0/20 comment="" disabled=no list=List_ALL_China
 add address=139.159.112.0/22 comment="" disabled=no list=List_ALL_China
 add address=139.159.132.0/22 comment="" disabled=no list=List_ALL_China
 add address=139.159.136.0/21 comment="" disabled=no list=List_ALL_China
@@ -3613,7 +3592,6 @@ add address=148.135.201.0/24 comment="" disabled=no list=List_ALL_China
 add address=148.135.202.0/23 comment="" disabled=no list=List_ALL_China
 add address=148.135.255.0/24 comment="" disabled=no list=List_ALL_China
 add address=149.129.0.0/20 comment="" disabled=no list=List_ALL_China
-add address=149.129.16.0/23 comment="" disabled=no list=List_ALL_China
 add address=150.109.32.0/19 comment="" disabled=no list=List_ALL_China
 add address=150.109.64.0/20 comment="" disabled=no list=List_ALL_China
 add address=150.109.96.0/19 comment="" disabled=no list=List_ALL_China
@@ -4026,7 +4004,6 @@ add address=168.160.160.0/21 comment="" disabled=no list=List_ALL_China
 add address=168.160.168.0/24 comment="" disabled=no list=List_ALL_China
 add address=168.160.224.0/19 comment="" disabled=no list=List_ALL_China
 add address=168.199.214.0/23 comment="" disabled=no list=List_ALL_China
-add address=170.33.20.0/22 comment="" disabled=no list=List_ALL_China
 add address=171.8.0.0/13 comment="" disabled=no list=List_ALL_China
 add address=171.34.0.0/15 comment="" disabled=no list=List_ALL_China
 add address=171.36.0.0/14 comment="" disabled=no list=List_ALL_China
@@ -4511,14 +4488,12 @@ add address=202.4.252.0/22 comment="" disabled=no list=List_ALL_China
 add address=202.14.235.0/24 comment="" disabled=no list=List_ALL_China
 add address=202.14.236.0/23 comment="" disabled=no list=List_ALL_China
 add address=202.14.238.0/24 comment="" disabled=no list=List_ALL_China
-add address=202.38.2.0/23 comment="" disabled=no list=List_ALL_China
 add address=202.38.8.0/21 comment="" disabled=no list=List_ALL_China
 add address=202.38.64.0/18 comment="" disabled=no list=List_ALL_China
 add address=202.38.128.0/23 comment="" disabled=no list=List_ALL_China
 add address=202.38.132.0/23 comment="" disabled=no list=List_ALL_China
 add address=202.38.134.0/24 comment="" disabled=no list=List_ALL_China
 add address=202.38.140.0/23 comment="" disabled=no list=List_ALL_China
-add address=202.38.146.0/23 comment="" disabled=no list=List_ALL_China
 add address=202.38.152.0/23 comment="" disabled=no list=List_ALL_China
 add address=202.38.164.0/22 comment="" disabled=no list=List_ALL_China
 add address=202.38.184.0/21 comment="" disabled=no list=List_ALL_China
@@ -4943,10 +4918,8 @@ add address=203.205.64.0/19 comment="" disabled=no list=List_ALL_China
 add address=203.205.128.0/23 comment="" disabled=no list=List_ALL_China
 add address=203.205.134.0/23 comment="" disabled=no list=List_ALL_China
 add address=203.205.138.0/23 comment="" disabled=no list=List_ALL_China
-add address=203.205.141.0/24 comment="" disabled=no list=List_ALL_China
-add address=203.205.143.0/24 comment="" disabled=no list=List_ALL_China
-add address=203.205.145.0/24 comment="" disabled=no list=List_ALL_China
-add address=203.205.146.0/23 comment="" disabled=no list=List_ALL_China
+add address=203.205.140.0/22 comment="" disabled=no list=List_ALL_China
+add address=203.205.144.0/22 comment="" disabled=no list=List_ALL_China
 add address=203.205.218.0/23 comment="" disabled=no list=List_ALL_China
 add address=203.205.220.0/23 comment="" disabled=no list=List_ALL_China
 add address=203.205.232.0/21 comment="" disabled=no list=List_ALL_China
