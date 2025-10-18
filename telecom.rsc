@@ -1,4 +1,4 @@
-#ChinaTelecom   2025-10-17-05
+#ChinaTelecom   2025-10-18-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -155,6 +155,7 @@ add address=43.227.56.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.64.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.69.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.70.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=43.227.80.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.140.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.152.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=43.227.160.0/20 comment="" disabled=no list=List_ChinaTelecom
@@ -677,6 +678,7 @@ add address=103.44.168.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.44.171.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.44.236.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.44.240.0/20 comment="" disabled=no list=List_ChinaTelecom
+add address=103.45.128.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=103.45.168.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.45.172.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.45.176.0/20 comment="" disabled=no list=List_ChinaTelecom
@@ -802,7 +804,7 @@ add address=103.126.124.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.131.138.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.132.22.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.133.128.0/23 comment="" disabled=no list=List_ChinaTelecom
-add address=103.135.192.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=103.135.192.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.135.195.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.139.212.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.142.96.0/23 comment="" disabled=no list=List_ChinaTelecom
