@@ -1,4 +1,4 @@
-#ChinaMobile   2025-10-18-05
+#ChinaMobile   2025-10-19-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
