@@ -1,4 +1,4 @@
-#ChinaMobile   2025-10-23-05
+#ChinaMobile   2025-10-24-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -55,7 +55,7 @@ add address=43.239.172.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=43.240.136.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=43.241.76.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=43.242.84.0/22 comment="" disabled=no list=List_ChinaMobile
-add address=43.242.98.0/23 comment="" disabled=no list=List_ChinaMobile
+add address=43.242.96.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=43.248.112.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=43.248.232.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=43.250.236.0/22 comment="" disabled=no list=List_ChinaMobile
@@ -207,6 +207,7 @@ add address=103.240.244.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.244.64.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.247.176.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=103.248.152.0/24 comment="" disabled=no list=List_ChinaMobile
+add address=103.249.244.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.251.207.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.254.112.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=106.11.198.0/24 comment="" disabled=no list=List_ChinaMobile
@@ -258,7 +259,6 @@ add address=110.219.68.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=110.219.128.0/17 comment="" disabled=no list=List_ChinaMobile
 add address=111.0.0.0/10 comment="" disabled=no list=List_ChinaMobile
 add address=111.132.0.0/16 comment="" disabled=no list=List_ChinaMobile
-add address=111.235.165.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=111.235.171.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=111.235.172.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=111.235.174.0/24 comment="" disabled=no list=List_ChinaMobile
