@@ -1,4 +1,4 @@
-#Other_China   2025-12-21-05
+#Other_China   2025-12-22-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -558,7 +558,7 @@ add address=103.77.72.0/22 comment="" disabled=no list=List_Other_China
 add address=103.77.92.0/22 comment="" disabled=no list=List_Other_China
 add address=103.83.120.0/22 comment="" disabled=no list=List_Other_China
 add address=103.84.136.0/22 comment="" disabled=no list=List_Other_China
-add address=103.85.86.0/24 comment="" disabled=no list=List_Other_China
+add address=103.85.86.0/23 comment="" disabled=no list=List_Other_China
 add address=103.86.76.0/22 comment="" disabled=no list=List_Other_China
 add address=103.92.129.0/24 comment="" disabled=no list=List_Other_China
 add address=103.94.76.0/23 comment="" disabled=no list=List_Other_China
@@ -773,6 +773,7 @@ add address=147.139.0.0/16 comment="" disabled=no list=List_Other_China
 add address=149.129.0.0/20 comment="" disabled=no list=List_Other_China
 add address=149.129.64.0/18 comment="" disabled=no list=List_Other_China
 add address=149.129.128.0/17 comment="" disabled=no list=List_Other_China
+add address=150.107.61.0/24 comment="" disabled=no list=List_Other_China
 add address=150.109.32.0/19 comment="" disabled=no list=List_Other_China
 add address=150.109.64.0/20 comment="" disabled=no list=List_Other_China
 add address=150.109.96.0/19 comment="" disabled=no list=List_Other_China
@@ -1062,8 +1063,6 @@ add address=178.94.230.0/23 comment="" disabled=no list=List_Other_China
 add address=178.94.237.0/24 comment="" disabled=no list=List_Other_China
 add address=178.95.17.0/24 comment="" disabled=no list=List_Other_China
 add address=178.95.20.0/24 comment="" disabled=no list=List_Other_China
-add address=178.95.22.0/24 comment="" disabled=no list=List_Other_China
-add address=178.95.88.0/24 comment="" disabled=no list=List_Other_China
 add address=178.95.96.0/22 comment="" disabled=no list=List_Other_China
 add address=178.95.137.0/24 comment="" disabled=no list=List_Other_China
 add address=178.95.168.0/24 comment="" disabled=no list=List_Other_China
