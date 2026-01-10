@@ -16,7 +16,7 @@
 
 ###### 在/System Script下添加如下脚本内容
 ```
-/tool fetch url="https://fastraw.ixnic.net/ixmu/ros-cnip-rsc/main/all_china.rsc"
+/tool fetch url="https://github.10105410.xyz/ixmu/ros-cnip-rsc/raw/refs/heads/main/all_china.rsc"
 /system logging disable 0
 /ip firewall address-list
 remove [find list=List_ALL_China]
@@ -24,6 +24,17 @@ remove [find list=List_ALL_China]
 /system logging enable 0
 /file remove [find name="all_china.rsc"]
 :local ListAllChina [:len [/ip firewall address-list find list="List_ALL_China"]]
-:log info ("List_ALL_China列表更新:"."$ListAllChina"."条规则")
+:log info ("List_ALL_China更新:"."$ListAllChina"."条")
+
+
+/tool fetch url="https://github.10105410.xyz/ixmu/ros-cnip-rsc/raw/refs/heads/main/all_china_v6.rsc"
+/system logging disable 0
+/ipv6 firewall address-list
+remove [find list=List_ALL_China]
+/import all_china_v6.rsc
+/system logging enable 0
+/file remove [find name="all_china_v6.rsc"]
+:local ListAllChina [:len [/ipv6 firewall address-list find list="List_ALL_China"]]
+:log info ("List_ALL_China_V6更新:"."$ListAllChina"."条")
 ```
 建议手动执行，也可以在/System Scheduler下添加一个脚本定时
