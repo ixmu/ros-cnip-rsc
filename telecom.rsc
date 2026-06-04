@@ -1,4 +1,4 @@
-#ChinaTelecom   2026-06-03-05
+#ChinaTelecom   2026-06-04-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -167,6 +167,7 @@ add address=43.228.240.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.229.50.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.229.184.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.229.216.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=43.230.72.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=43.230.221.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.230.222.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=43.231.96.0/20 comment="" disabled=no list=List_ChinaTelecom
@@ -400,6 +401,7 @@ add address=59.153.164.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=59.172.0.0/14 comment="" disabled=no list=List_ChinaTelecom
 add address=60.160.0.0/11 comment="" disabled=no list=List_ChinaTelecom
 add address=60.204.0.0/15 comment="" disabled=no list=List_ChinaTelecom
+add address=60.232.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=60.235.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=60.247.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=61.4.80.0/23 comment="" disabled=no list=List_ChinaTelecom
@@ -528,6 +530,8 @@ add address=101.129.0.0/16 comment="" disabled=no list=List_ChinaTelecom
 add address=101.132.0.0/15 comment="" disabled=no list=List_ChinaTelecom
 add address=101.198.0.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=101.198.4.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=101.198.170.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=101.198.172.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=101.199.112.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=101.200.0.0/15 comment="" disabled=no list=List_ChinaTelecom
 add address=101.203.172.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -569,7 +573,7 @@ add address=103.5.52.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.5.192.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.5.194.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.6.220.0/22 comment="" disabled=no list=List_ChinaTelecom
-add address=103.7.140.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=103.7.140.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.8.32.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.8.52.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.8.68.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -598,6 +602,7 @@ add address=103.25.156.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.26.0.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.26.66.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.26.76.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=103.27.4.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.27.24.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.28.8.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.28.212.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -623,6 +628,7 @@ add address=103.37.46.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.37.72.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.37.100.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.37.172.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=103.38.76.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.38.116.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.38.252.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.39.64.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -638,9 +644,10 @@ add address=103.41.116.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.41.164.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.41.232.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.42.76.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=103.43.132.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.43.134.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.44.58.0/23 comment="" disabled=no list=List_ChinaTelecom
-add address=103.44.144.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=103.44.144.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.44.236.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.44.240.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=103.45.128.0/19 comment="" disabled=no list=List_ChinaTelecom
@@ -656,6 +663,7 @@ add address=103.46.128.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=103.46.136.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.47.80.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.49.12.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=103.49.108.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.52.100.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.52.172.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.52.176.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -724,6 +732,7 @@ add address=103.98.127.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.98.220.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.98.248.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.98.252.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=103.99.104.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.101.124.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=103.101.180.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.102.200.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -866,9 +875,10 @@ add address=103.230.236.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.231.64.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=103.233.4.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.233.52.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=103.233.138.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.234.20.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.234.128.0/23 comment="" disabled=no list=List_ChinaTelecom
-add address=103.235.102.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=103.235.100.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.235.136.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.235.144.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.235.220.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -905,8 +915,7 @@ add address=103.245.23.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.245.128.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.247.168.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.247.176.0/22 comment="" disabled=no list=List_ChinaTelecom
-add address=103.248.153.0/24 comment="" disabled=no list=List_ChinaTelecom
-add address=103.248.154.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=103.248.152.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.249.136.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=103.249.244.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=103.249.252.0/22 comment="" disabled=no list=List_ChinaTelecom
@@ -2076,6 +2085,7 @@ add address=202.123.110.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=202.125.176.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=202.127.48.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=202.127.192.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=202.136.48.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=202.136.72.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=202.136.208.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=202.136.216.0/23 comment="" disabled=no list=List_ChinaTelecom
@@ -2512,11 +2522,14 @@ add address=218.96.126.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=218.96.128.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=218.96.241.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=218.96.255.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=218.97.4.0/24 comment="" disabled=no list=List_ChinaTelecom
+add address=218.97.14.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=218.97.160.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=218.97.240.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=218.98.96.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=218.98.104.0/22 comment="" disabled=no list=List_ChinaTelecom
 add address=218.98.108.0/23 comment="" disabled=no list=List_ChinaTelecom
+add address=218.98.111.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=218.98.112.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=218.98.176.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=218.98.192.0/24 comment="" disabled=no list=List_ChinaTelecom
