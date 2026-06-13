@@ -1,4 +1,4 @@
-#ChinaTelecom   2026-06-12-05
+#ChinaTelecom   2026-06-13-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -145,8 +145,9 @@ add address=43.226.32.0/20 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.48.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.50.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.52.0/22 comment="" disabled=no list=List_ChinaTelecom
-add address=43.226.56.0/21 comment="" disabled=no list=List_ChinaTelecom
-add address=43.226.64.0/20 comment="" disabled=no list=List_ChinaTelecom
+add address=43.226.64.0/21 comment="" disabled=no list=List_ChinaTelecom
+add address=43.226.72.0/22 comment="" disabled=no list=List_ChinaTelecom
+add address=43.226.76.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.128.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.237.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=43.226.239.0/24 comment="" disabled=no list=List_ChinaTelecom
@@ -2370,7 +2371,6 @@ add address=210.77.128.0/19 comment="" disabled=no list=List_ChinaTelecom
 add address=210.78.128.0/24 comment="" disabled=no list=List_ChinaTelecom
 add address=210.78.134.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=210.78.139.0/24 comment="" disabled=no list=List_ChinaTelecom
-add address=210.78.144.0/23 comment="" disabled=no list=List_ChinaTelecom
 add address=210.185.192.0/18 comment="" disabled=no list=List_ChinaTelecom
 add address=210.192.104.0/21 comment="" disabled=no list=List_ChinaTelecom
 add address=210.192.116.0/22 comment="" disabled=no list=List_ChinaTelecom
