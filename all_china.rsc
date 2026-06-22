@@ -1,4 +1,4 @@
-#ALL_China   2026-06-21-05
+#ALL_China   2026-06-22-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -250,7 +250,7 @@ add address=42.242.0.0/15 comment="" disabled=no list=List_ALL_China
 add address=42.244.0.0/14 comment="" disabled=no list=List_ALL_China
 add address=42.248.0.0/15 comment="" disabled=no list=List_ALL_China
 add address=43.96.8.0/24 comment="" disabled=no list=List_ALL_China
-add address=43.96.10.0/24 comment="" disabled=no list=List_ALL_China
+add address=43.96.10.0/23 comment="" disabled=no list=List_ALL_China
 add address=43.96.34.0/24 comment="" disabled=no list=List_ALL_China
 add address=43.96.54.0/24 comment="" disabled=no list=List_ALL_China
 add address=43.96.80.0/24 comment="" disabled=no list=List_ALL_China
@@ -633,7 +633,7 @@ add address=47.235.24.0/22 comment="" disabled=no list=List_ALL_China
 add address=47.236.0.0/15 comment="" disabled=no list=List_ALL_China
 add address=47.241.0.0/16 comment="" disabled=no list=List_ALL_China
 add address=47.245.64.0/18 comment="" disabled=no list=List_ALL_China
-add address=47.246.66.0/24 comment="" disabled=no list=List_ALL_China
+add address=47.246.66.0/23 comment="" disabled=no list=List_ALL_China
 add address=47.246.72.0/21 comment="" disabled=no list=List_ALL_China
 add address=47.246.80.0/24 comment="" disabled=no list=List_ALL_China
 add address=47.246.82.0/23 comment="" disabled=no list=List_ALL_China
@@ -4045,7 +4045,7 @@ add address=194.33.182.0/24 comment="" disabled=no list=List_ALL_China
 add address=194.34.175.0/24 comment="" disabled=no list=List_ALL_China
 add address=194.104.138.0/24 comment="" disabled=no list=List_ALL_China
 add address=194.127.229.0/24 comment="" disabled=no list=List_ALL_China
-add address=194.138.202.0/24 comment="" disabled=no list=List_ALL_China
+add address=194.138.202.0/23 comment="" disabled=no list=List_ALL_China
 add address=194.138.245.0/24 comment="" disabled=no list=List_ALL_China
 add address=194.169.48.0/24 comment="" disabled=no list=List_ALL_China
 add address=195.78.56.0/24 comment="" disabled=no list=List_ALL_China
