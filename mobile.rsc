@@ -1,4 +1,4 @@
-#ChinaMobile   2026-07-28-05
+#ChinaMobile   2026-07-29-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -187,7 +187,6 @@ add address=103.156.68.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.161.254.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.170.212.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.174.94.0/23 comment="" disabled=no list=List_ChinaMobile
-add address=103.177.28.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.179.78.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.181.234.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.189.154.0/23 comment="" disabled=no list=List_ChinaMobile
@@ -222,7 +221,6 @@ add address=103.254.112.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=106.11.1.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=106.11.36.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=106.11.198.0/24 comment="" disabled=no list=List_ChinaMobile
-add address=110.40.0.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=110.76.4.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=110.76.12.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=110.76.26.0/24 comment="" disabled=no list=List_ChinaMobile
@@ -324,8 +322,6 @@ add address=120.72.190.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=120.130.0.0/18 comment="" disabled=no list=List_ChinaMobile
 add address=120.130.64.0/19 comment="" disabled=no list=List_ChinaMobile
 add address=120.131.18.0/24 comment="" disabled=no list=List_ChinaMobile
-add address=120.131.88.0/21 comment="" disabled=no list=List_ChinaMobile
-add address=120.131.124.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=120.136.140.0/22 comment="" disabled=no list=List_ChinaMobile
 add address=120.136.144.0/21 comment="" disabled=no list=List_ChinaMobile
 add address=120.136.152.0/22 comment="" disabled=no list=List_ChinaMobile
