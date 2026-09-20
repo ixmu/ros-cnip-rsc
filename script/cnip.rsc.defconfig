@@ -1,2 +1,2 @@
 /ip firewall address-list
-add address=160.251.141.76 list=List_ALL_China comment=cloudvps-ip-conoha
+add address=8.210.193.65 list=List_ALL_China comment=cloudvps-ip-alihk
