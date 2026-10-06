@@ -16,7 +16,7 @@
 
 ###### 在/System Script下添加如下脚本内容
 ```
-/tool fetch url="https://github.10105410.xyz/ixmu/ros-cnip-rsc/raw/refs/heads/main/all_china.rsc"
+/tool fetch url="https://ghub.10105410.xyz/ixmu/ros-cnip-rsc/raw/refs/heads/main/all_china.rsc"
 /system logging disable 0
 /ip firewall address-list
 remove [find list=List_ALL_China]
@@ -27,7 +27,7 @@ remove [find list=List_ALL_China]
 :log info ("List_ALL_China更新:"."$ListAllChina"."条")
 
 
-/tool fetch url="https://github.10105410.xyz/ixmu/ros-cnip-rsc/raw/refs/heads/main/all_china_v6.rsc"
+/tool fetch url="https://ghub.10105410.xyz/ixmu/ros-cnip-rsc/raw/refs/heads/main/all_china_v6.rsc"
 /system logging disable 0
 /ipv6 firewall address-list
 remove [find list=List_ALL_China]
