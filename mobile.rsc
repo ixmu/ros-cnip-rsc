@@ -1,4 +1,4 @@
-#ChinaMobile   2026-10-21-05
+#ChinaMobile   2026-10-22-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -195,6 +195,7 @@ add address=103.170.212.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.174.94.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.179.78.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.181.234.0/24 comment="" disabled=no list=List_ChinaMobile
+add address=103.189.154.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.190.122.0/23 comment="" disabled=no list=List_ChinaMobile
 add address=103.191.102.0/24 comment="" disabled=no list=List_ChinaMobile
 add address=103.192.0.0/22 comment="" disabled=no list=List_ChinaMobile
