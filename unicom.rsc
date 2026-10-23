@@ -1,4 +1,4 @@
-#ChinaUnicom   2026-10-22-05
+#ChinaUnicom   2026-10-23-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -557,6 +557,7 @@ add address=103.145.42.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=103.146.126.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=103.150.24.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=103.150.164.0/23 comment="" disabled=no list=List_ChinaUnicom
+add address=103.151.148.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=103.152.76.0/23 comment="" disabled=no list=List_ChinaUnicom
 add address=103.154.41.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=103.155.76.0/23 comment="" disabled=no list=List_ChinaUnicom
@@ -635,6 +636,7 @@ add address=103.239.246.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=103.240.36.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.240.84.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.240.124.0/22 comment="" disabled=no list=List_ChinaUnicom
+add address=103.241.95.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=103.241.220.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.242.172.0/22 comment="" disabled=no list=List_ChinaUnicom
 add address=103.243.136.0/22 comment="" disabled=no list=List_ChinaUnicom
@@ -1618,7 +1620,7 @@ add address=210.76.77.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=210.76.85.0/24 comment="" disabled=no list=List_ChinaUnicom
 add address=210.77.32.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=210.77.144.0/20 comment="" disabled=no list=List_ChinaUnicom
-add address=210.77.224.0/19 comment="" disabled=no list=List_ChinaUnicom
+add address=210.77.192.0/18 comment="" disabled=no list=List_ChinaUnicom
 add address=210.79.224.0/19 comment="" disabled=no list=List_ChinaUnicom
 add address=210.82.0.0/15 comment="" disabled=no list=List_ChinaUnicom
 add address=210.87.128.0/18 comment="" disabled=no list=List_ChinaUnicom
