@@ -1,4 +1,4 @@
-#ChinaCerNet   2026-10-31-05
+#ChinaCerNet   2026-11-01-05
 #WWW.TCP5.COM  Metro  QQ群:122744483
 #
 /ip firewall address-list
@@ -45,6 +45,7 @@ add address=121.52.160.0/19 comment="" disabled=no list=List_ChinaCerNet
 add address=121.192.0.0/14 comment="" disabled=no list=List_ChinaCerNet
 add address=121.248.0.0/14 comment="" disabled=no list=List_ChinaCerNet
 add address=122.204.0.0/14 comment="" disabled=no list=List_ChinaCerNet
+add address=124.16.168.0/24 comment="" disabled=no list=List_ChinaCerNet
 add address=125.216.0.0/13 comment="" disabled=no list=List_ChinaCerNet
 add address=162.105.0.0/16 comment="" disabled=no list=List_ChinaCerNet
 add address=165.101.208.0/23 comment="" disabled=no list=List_ChinaCerNet
