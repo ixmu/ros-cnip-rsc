@@ -51,7 +51,9 @@ remove [find list=List_ALL_China]
 
 生成结果只提交到 `ocserv/`，不在 push 的 `paths` 过滤范围内，因此不会形成自触发循环。
 
-推送产物使用仓库密钥 `ACTION_TOKEN`（或 `GH_TOKEN`，二者任一即可）；两者都没配置时自动退回 `GITHUB_TOKEN`，此时需要把 Settings → Actions → General → Workflow permissions 设为 **Read and write**。`Clean Workflows` 每 7 天清理一次三个工作流中失败/超时的运行记录（成功记录由 GitHub 自身的保留策略管理）。
+**凭据**：三个工作流统一按 `ACTION_TOKEN` → `GH_TOKEN` → 内置 `GITHUB_TOKEN` 的顺序取 token，仓库里一个密钥都没配也能正常提交推送（走 `GITHUB_TOKEN` 时写权限由各自的 `permissions:` 声明，不依赖仓库全局的 Workflow permissions 设置）。用 `GITHUB_TOKEN` 推送不会产生新的 workflow 事件，正好杜绝自触发循环；若想让 bot 提交也触发下游，再建一个有 `contents: write` 的细粒度令牌填进 `ACTION_TOKEN` 即可。
+
+**运行记录**：GitHub 默认保留 90 天，日更工作流很快堆出几百条历史，`Clean Workflows` 把保留期收紧到 7 天（每个工作流另保底 3 条，进行中的运行永不动）。逻辑在 `.github/scripts/clean_runs.py`，直接调 REST API，不依赖第三方 action；定时任务每周执行一次，也可手动触发并临时调整保留天数、或先用 `dry_run` 看看会删掉哪些记录。三个工作流的依赖均已固定在 Node 24 运行时的大版本（`actions/checkout@v7`、`actions/setup-python@v7`、`stefanzweifel/git-auto-commit-action@v7`），无 Node 弃用告警。
 
 ### 两套产物
 

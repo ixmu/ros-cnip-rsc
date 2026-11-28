@@ -1,27 +1,46 @@
 name: Clean Workflows
 
+# 运行记录保留策略：GitHub 默认保留 90 天，日更工作流会堆出上百条无用历史，
+# 这里收紧到 7 天。具体筛选/删除逻辑在 .github/scripts/clean_runs.py，
+# 直接调用 REST API，不依赖第三方 action（也就没有 Node 运行时弃用告警）。
+#
+# 手动触发时可以调整保留天数、保底条数，或先用 dry-run 看看会删掉哪些记录。
 on:
   workflow_dispatch:
+    inputs:
+      keep_days:
+        description: '保留天数（更早的已完成记录将被删除）'
+        required: false
+        default: '7'
+      keep_recent:
+        description: '每个工作流最少保留条数'
+        required: false
+        default: '3'
+      dry_run:
+        description: '只列出待删除记录，不实际删除'
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: '15 9 */7 * *'
 
 permissions:
   actions: write
+  contents: read
 
 jobs:
   delete_runs:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete workflow runs
-        uses: dmvict/clean-workflow-runs@v1.0.0
-        with:
-          token: ${{ secrets.ACTION_TOKEN || secrets.GH_TOKEN }}
-          repo: ixmu/ros-cnip-rsc
-          workflow_id: cnip.yml,clean.yml,norange.yml
-          branch: main
-          run_conclusions: |
-            failure
-            timed_out
-          save_period: 7
-          save_min_runs_number: 1
-          dry: false
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Delete old workflow runs
+        env:
+          # 未配置仓库密钥时退回内置 GITHUB_TOKEN；actions: write 即可删除运行记录。
+          GH_TOKEN: ${{ secrets.ACTION_TOKEN || secrets.GH_TOKEN || github.token }}
+          KEEP_DAYS: ${{ inputs.keep_days }}
+          KEEP_RECENT: ${{ inputs.keep_recent }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          WORKFLOWS: cnip.yml,clean.yml,norange.yml
+        run: python3 .github/scripts/clean_runs.py
