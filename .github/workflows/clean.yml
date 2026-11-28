@@ -22,6 +22,6 @@ jobs:
           run_conclusions: |
             failure
             timed_out
-          save_period: 30
+          save_period: 7
           save_min_runs_number: 1
           dry: false
