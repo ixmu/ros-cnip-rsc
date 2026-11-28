@@ -43,7 +43,13 @@ remove [find list=List_ALL_China]
 
 ## ocserv NoRoute 配置
 
-`.github/workflows/norange.yml` 在每次列表更新后自动重新生成，也可手动触发：**Actions → NoRoute Config → Run workflow**（可临时覆盖条数/权重参数）。
+`.github/workflows/norange.yml` 有三种触发方式：
+
+1. **列表更新后自动重建**——`ROS CNIP List` 运行成功即触发（`workflow_run`）；
+2. **生成逻辑变更时自动重建**——`.github/**`（生成器脚本或工作流本身）推送到 `main` 即触发；
+3. **手动重建**——**Actions → NoRoute Config → Run workflow**，可临时覆盖条目数与裁剪权重。
+
+生成结果只提交到 `ocserv/`，不在 push 的 `paths` 过滤范围内，因此不会形成自触发循环。
 
 | 文件 | 规则数 | 中国IP覆盖率 | 精确率 | 超覆盖 |
 |------|-------:|-------------:|-------:|-------:|
