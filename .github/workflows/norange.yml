@@ -1,27 +1,31 @@
 name: NoRoute Config
 
 # 触发方式：
-#   1. 手动（Actions → NoRoute Config → Run workflow），可调条目数 / 裁剪权重
+#   1. 手动（Actions → NoRoute Config → Run workflow），可调通用档条目数 / 裁剪权重
 #   2. push：生成器或本工作流变更时自动重建（.github/**）
 #   3. workflow_run：ROS CNIP List 每日更新成功后自动重建
 #      列表数据本身不放在 push paths 里，避免同一次更新触发两次运行。
+#
+# 每次运行生成两套 no-route：
+#   ocserv/            通用档（默认 512 v4 + 384 v6 ≈ 896 条，含手机/PC 全终端）
+#   ocserv/desktop/    桌面档（800 v4 + 512 v6 ≈ 1312 条，桌面客户端路由上限宽松）
 on:
   workflow_dispatch:
     inputs:
       target_v4:
-        description: 'IPv4 最大条数'
+        description: '通用档 IPv4 最大条数'
         required: false
-        default: '800'
+        default: '512'
       target_v6:
-        description: 'IPv6 最大条数'
+        description: '通用档 IPv6 最大条数'
         required: false
-        default: '800'
+        default: '384'
       prune_v4:
-        description: 'IPv4 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
+        description: '通用档 IPv4 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
         required: false
-        default: '4'
+        default: '1'
       prune_v6:
-        description: 'IPv6 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
+        description: 'IPv6 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖，两套共用）'
         required: false
         default: '0'
   push:
@@ -57,7 +61,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Generate ocserv no-route config
+      - name: Generate ocserv no-route configs
         env:
           # inputs.* 只有 workflow_dispatch 才有值，其它事件为空串 → 回落默认值。
           # 用 shell 的 ${VAR:-default} 而不是 Actions 的 ||，
@@ -66,25 +70,40 @@ jobs:
           TARGET_V6: ${{ inputs.target_v6 }}
           PRUNE_V4: ${{ inputs.prune_v4 }}
           PRUNE_V6: ${{ inputs.prune_v6 }}
+          # 桌面档参数固定在下面，需要调整直接改这里的默认值即可。
+          DESKTOP_V4: ''
+          DESKTOP_V6: ''
+          DESKTOP_PRUNE_V4: ''
         run: |
           set -euo pipefail
-          TARGET_V4="${TARGET_V4:-800}"
-          TARGET_V6="${TARGET_V6:-800}"
-          PRUNE_V4="${PRUNE_V4:-4}"
+          TARGET_V4="${TARGET_V4:-512}"
+          TARGET_V6="${TARGET_V6:-384}"
+          PRUNE_V4="${PRUNE_V4:-1}"
           PRUNE_V6="${PRUNE_V6:-0}"
-          echo "event=${GITHUB_EVENT_NAME} target_v4=${TARGET_V4} target_v6=${TARGET_V6} prune_v4=${PRUNE_V4} prune_v6=${PRUNE_V6}"
-          python3 .github/scripts/norange.py \
-            --target-v4 "${TARGET_V4}" \
-            --target-v6 "${TARGET_V6}" \
-            --prune-v4  "${PRUNE_V4}" \
-            --prune-v6  "${PRUNE_V6}"
-          echo '--- ocserv/no-route-ipv4.conf ---'
-          head -8 ocserv/no-route-ipv4.conf
-          echo '--- ocserv/no-route-ipv6.conf ---'
-          head -8 ocserv/no-route-ipv6.conf
-          echo '--- entries ---'
-          grep -c '^no-route' ocserv/no-route-ipv4.conf || true
-          grep -c '^no-route' ocserv/no-route-ipv6.conf || true
+          DESKTOP_V4="${DESKTOP_V4:-800}"
+          DESKTOP_V6="${DESKTOP_V6:-512}"
+          DESKTOP_PRUNE_V4="${DESKTOP_PRUNE_V4:-2}"
+          echo "event=${GITHUB_EVENT_NAME}"
+
+          gen() {  # $1=out-dir  $2=v4 条数  $3=v6 条数  $4=IPv4 λ  $5=IPv6 λ
+            echo "=== $1: target_v4=$2 target_v6=$3 prune_v4=$4 prune_v6=$5 ==="
+            python3 .github/scripts/norange.py \
+              --out-dir "$1" \
+              --target-v4 "$2" \
+              --target-v6 "$3" \
+              --prune-v4  "$4" \
+              --prune-v6  "$5"
+            for f in ipv4 ipv6; do
+              echo "--- $1/no-route-${f}.conf ---"
+              head -6 "$1/no-route-${f}.conf"
+              printf 'no-route lines: %s\n' "$(grep -c '^no-route' "$1/no-route-${f}.conf" || true)"
+            done
+          }
+
+          # 通用档：所有终端都能安全加载
+          gen ocserv         "$TARGET_V4"   "$TARGET_V6"         "$PRUNE_V4"          "$PRUNE_V6"
+          # 桌面档：条目更多、更准，桌面客户端用 config-per-group 指到这里
+          gen ocserv/desktop "$DESKTOP_V4" "$DESKTOP_V6" "$DESKTOP_PRUNE_V4" "$PRUNE_V6"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5

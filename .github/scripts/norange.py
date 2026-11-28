@@ -25,10 +25,14 @@ Algorithm
    λ = 0 disables pruning (every address must be covered, 100% recall).
    Larger λ keeps more China addresses at the price of more over-coverage.
 
-λ is picked per family: --prune-v4 defaults to 4 (worth it, the IPv4 list is
-made of thousands of small fragments), --prune-v6 defaults to 0 because the
-IPv6 source is already compact enough that pruning only throws away prefixes
-without buying measurable precision.
+Defaults are the cross-platform tier: --target-v4 512 / --target-v6 384
+(~896 rules, safe for every ocserv client build, including the Windows,
+Android and iOS ones that cap the number of pushed routes).  With
+--prune-v4 1 the DP drops only the tails that cost less to ignore than to
+widen a prefix for, which is what keeps recall high at a low rule count;
+higher λ (2-4) buys precision instead and is meant for the desktop tier.
+--prune-v6 defaults to 0 because the IPv6 source is already compact enough
+that pruning only throws away prefixes without buying measurable precision.
 
 Output
 ------
@@ -338,14 +342,14 @@ def main() -> None:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    ap.add_argument('--target-v4', type=int, default=800, metavar='N',
-                    help='IPv4 max rules (default: 800)')
-    ap.add_argument('--target-v6', type=int, default=800, metavar='N',
-                    help='IPv6 max rules (default: 800)')
-    ap.add_argument('--prune-v4', type=int, default=4, metavar='λ',
+    ap.add_argument('--target-v4', type=int, default=512, metavar='N',
+                    help='IPv4 max rules (default: 512)')
+    ap.add_argument('--target-v6', type=int, default=384, metavar='N',
+                    help='IPv6 max rules (default: 384)')
+    ap.add_argument('--prune-v4', type=int, default=1, metavar='λ',
                     dest='prune_v4',
                     help='IPv4 cost of one dropped China address, '
-                         '0 = never prune (default: 4)')
+                         '0 = never prune (default: 1)')
     ap.add_argument('--prune-v6', type=int, default=0, metavar='λ',
                     dest='prune_v6',
                     help='IPv6 cost of one dropped China address, '
@@ -366,7 +370,7 @@ def main() -> None:
     args = ap.parse_args()
 
     out_dir = Path(args.out_dir)
-    out_dir.mkdir(exist_ok=True)
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     for fam, src_path, target, bits, name, fname, priv, lam in (
         ('IPv4', args.in_v4, args.target_v4, 32, 'China IPv4',
