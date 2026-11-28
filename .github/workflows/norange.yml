@@ -1,5 +1,10 @@
 name: NoRoute Config
 
+# 触发方式：
+#   1. 手动（Actions → NoRoute Config → Run workflow），可调条目数 / 裁剪权重
+#   2. push：生成器或本工作流变更时自动重建（.github/**）
+#   3. workflow_run：ROS CNIP List 每日更新成功后自动重建
+#      列表数据本身不放在 push paths 里，避免同一次更新触发两次运行。
 on:
   workflow_dispatch:
     inputs:
@@ -19,6 +24,10 @@ on:
         description: 'IPv6 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
         required: false
         default: '0'
+  push:
+    branches: [main]
+    paths:
+      - '.github/**'
   workflow_run:
     workflows: ["ROS CNIP List"]
     types: [completed]
@@ -33,7 +42,7 @@ concurrency:
 jobs:
   generate:
     if: >-
-      github.event_name == 'workflow_dispatch'
+      github.event_name != 'workflow_run'
       || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
@@ -49,15 +58,33 @@ jobs:
           python-version: '3.x'
 
       - name: Generate ocserv no-route config
+        env:
+          # inputs.* 只有 workflow_dispatch 才有值，其它事件为空串 → 回落默认值。
+          # 用 shell 的 ${VAR:-default} 而不是 Actions 的 ||，
+          # 避免 λ=0 这类取值被当成假值丢掉。
+          TARGET_V4: ${{ inputs.target_v4 }}
+          TARGET_V6: ${{ inputs.target_v6 }}
+          PRUNE_V4: ${{ inputs.prune_v4 }}
+          PRUNE_V6: ${{ inputs.prune_v6 }}
         run: |
           set -euo pipefail
+          TARGET_V4="${TARGET_V4:-800}"
+          TARGET_V6="${TARGET_V6:-800}"
+          PRUNE_V4="${PRUNE_V4:-4}"
+          PRUNE_V6="${PRUNE_V6:-0}"
+          echo "event=${GITHUB_EVENT_NAME} target_v4=${TARGET_V4} target_v6=${TARGET_V6} prune_v4=${PRUNE_V4} prune_v6=${PRUNE_V6}"
           python3 .github/scripts/norange.py \
-            --target-v4 "${{ inputs.target_v4 || 800 }}" \
-            --target-v6 "${{ inputs.target_v6 || 800 }}" \
-            --prune-v4  "${{ inputs.prune_v4  || 4 }}" \
-            --prune-v6  "${{ inputs.prune_v6  || 0 }}"
-          head -6 ocserv/no-route-ipv4.conf
-          head -6 ocserv/no-route-ipv6.conf
+            --target-v4 "${TARGET_V4}" \
+            --target-v6 "${TARGET_V6}" \
+            --prune-v4  "${PRUNE_V4}" \
+            --prune-v6  "${PRUNE_V6}"
+          echo '--- ocserv/no-route-ipv4.conf ---'
+          head -8 ocserv/no-route-ipv4.conf
+          echo '--- ocserv/no-route-ipv6.conf ---'
+          head -8 ocserv/no-route-ipv6.conf
+          echo '--- entries ---'
+          grep -c '^no-route' ocserv/no-route-ipv4.conf || true
+          grep -c '^no-route' ocserv/no-route-ipv6.conf || true
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
