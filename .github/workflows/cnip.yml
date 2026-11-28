@@ -21,6 +21,31 @@ jobs:
         with:
           token: ${{ secrets.ACTION_TOKEN || secrets.GH_TOKEN || github.token }}
 
+      # 只报凭据来源，不回显令牌内容；先 dry-run 推一次一次性 ref，把「令牌没有
+      # contents: write」或「已过期」这类问题变成一条明确的告警，而不是让提交步骤
+      # 抛一段难以定位的 git 错误。
+      - name: Check push credentials
+        env:
+          ACTION_TOKEN: ${{ secrets.ACTION_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_TOKEN: ${{ secrets.ACTION_TOKEN || secrets.GH_TOKEN || github.token }}
+        run: |
+          set -eu
+          if [ -n "${ACTION_TOKEN}" ]; then
+            src="仓库密钥 ACTION_TOKEN"
+          elif [ -n "${GH_TOKEN}" ]; then
+            src="仓库密钥 GH_TOKEN"
+          else
+            src="内置 GITHUB_TOKEN（仓库未配置密钥）"
+          fi
+          echo "提交与推送使用：${src}"
+          probe="https://x-access-token:${GIT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git push --dry-run "$probe" HEAD:refs/heads/ci/permission-probe >/dev/null 2>&1; then
+            echo "contents: write 校验通过"
+          else
+            echo "::warning::${src} 无法推送：缺少 contents: write 或已过期，提交步骤预计会失败"
+          fi
+
       - name: Fetch CNIP lists
         run: |
           set -euo pipefail

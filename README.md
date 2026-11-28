@@ -51,7 +51,7 @@ remove [find list=List_ALL_China]
 
 生成结果只提交到 `ocserv/`，不在 push 的 `paths` 过滤范围内，因此不会形成自触发循环。
 
-**凭据**：三个工作流统一按 `ACTION_TOKEN` → `GH_TOKEN` → 内置 `GITHUB_TOKEN` 的顺序取 token，仓库里一个密钥都没配也能正常提交推送（走 `GITHUB_TOKEN` 时写权限由各自的 `permissions:` 声明，不依赖仓库全局的 Workflow permissions 设置）。用 `GITHUB_TOKEN` 推送不会产生新的 workflow 事件，正好杜绝自触发循环；若要用自己的令牌，建一个细粒度 PAT（只勾 **Contents: Read and write**，需要我用 API 代管密钥时再加 `Actions: Read and write`）填进 `ACTION_TOKEN`；注意令牌一旦填进来就会顶掉内置 `GITHUB_TOKEN`，**少了 contents: write 会直接 push 403**（已实测：只有 Actions 权限的令牌读写 workflow 正常，`git push` 返回 `Permission to ixmu/ros-cnip-rsc.git denied to ixmu`），过期同理，所以宁可留空让内置令牌兜底。
+**凭据**：三个工作流统一按 `ACTION_TOKEN` → `GH_TOKEN` → 内置 `GITHUB_TOKEN` 的顺序取 token，仓库里一个密钥都没配也能正常提交推送（走 `GITHUB_TOKEN` 时写权限由各自的 `permissions:` 声明，不依赖仓库全局的 Workflow permissions 设置）。用 `GITHUB_TOKEN` 推送不会产生新的 workflow 事件，正好杜绝自触发循环；若要用自己的令牌，建一个细粒度 PAT（只勾 **Contents: Read and write**，需要我用 API 代管密钥时再加 `Actions: Read and write`）填进 `ACTION_TOKEN`；注意令牌一旦填进来就会顶掉内置 `GITHUB_TOKEN`，**少了 contents: write 会直接 push 403**（已实测：只有 Actions 权限的令牌读写 workflow 正常，`git push` 返回 `Permission to ixmu/ros-cnip-rsc.git denied to ixmu`），过期同理，所以宁可留空让内置令牌兜底。`ROS CNIP List` 和 `NoRoute Config` 都在提交前有一步 `Check push credentials`：只打印本次用的是哪个凭据来源（不回显内容），并对该凭据做一次 `git push --dry-run` 权限探测，令牌权限不足或过期时先给出明确告警。
 
 **运行记录**：GitHub 默认保留 90 天，日更工作流很快堆出几百条历史，`Clean Workflows` 把保留期收紧到 7 天（每个工作流另保底 3 条，进行中的运行永不动）。逻辑在 `.github/scripts/clean_runs.py`，直接调 REST API，不依赖第三方 action；定时任务每周执行一次，也可手动触发并临时调整保留天数、或先用 `dry_run` 看看会删掉哪些记录。三个工作流的依赖均已固定在 Node 24 运行时的大版本（`actions/checkout@v7`、`actions/setup-python@v7`、`stefanzweifel/git-auto-commit-action@v7`），无 Node 弃用告警。
 
