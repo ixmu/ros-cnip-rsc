@@ -1,26 +1,64 @@
-name: ROS CNIP list
+name: ROS CNIP List
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: 30 6 * * *
+    - cron: '30 6 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cnip-update
+  cancel-in-progress: false
 
 jobs:
-  ROS-IP-UPDATE:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.ACTION_TOKEN }}
-      - name: ros_cn_ip_update
+
+      - name: Fetch CNIP lists
         run: |
-          bash -x script/update.sh
-      - name: Push
-        id: list-push
-        uses: stefanzweifel/git-auto-commit-action@v4
+          set -euo pipefail
+
+          year_month=$(date "+%Y.%m")
+          filename=$(date "+%Y-%m-%d")
+          base_url="http://ros.tcp5.com/list/${year_month}"
+
+          # 检查当日列表是否已发布
+          status_code=$(curl -sf -o /dev/null -w "%{http_code}" \
+            "${base_url}/all_china${filename}-05.rsc" || true)
+          if [ "${status_code}" != "200" ]; then
+            echo "::warning::列表尚未发布（HTTP ${status_code}），跳过本次更新"
+            exit 0
+          fi
+
+          for list in all_china telecom unicom mobile cernet other; do
+            echo "::group::下载 ${list}"
+            curl -fLs --max-time 30 \
+              "${base_url}/${list}${filename}-05.rsc" \
+              -o "${list}.rsc"
+            echo "OK"
+            echo "::endgroup::"
+          done
+
+          echo "::group::下载 IPv6"
+          echo "/ipv6 firewall address-list" > all_china_v6.rsc
+          curl -fLs --max-time 30 \
+            https://raw.githubusercontent.com/ChanthMiao/China-IPv6-List/release/cn6.txt \
+            | sed -e 's/^/add address=/' \
+                  -e 's|$| comment="" disabled=no list=List_ALL_China|' \
+            >> all_china_v6.rsc
+          echo "OK"
+          echo "::endgroup::"
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update ros-cnip-rsc
-          skip_dirty_check: false
-          commit_user_name: Action Bot
-          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
-          commit_author: Action <actions@github.com>
+          commit_message: "Update ros-cnip-rsc"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"

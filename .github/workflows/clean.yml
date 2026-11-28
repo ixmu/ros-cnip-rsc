@@ -2,23 +2,26 @@ name: Clean Workflows
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: '15 9 */7 * *'
+
+permissions:
+  actions: write
+
 jobs:
   delete_runs:
     runs-on: ubuntu-latest
     steps:
-    - name: Delete workflow runs
-      uses: dmvict/clean-workflow-runs@v1.0.0
-      with:
-       token: ${{ secrets.ACTION_TOKEN }}
-       repo: ixmu/ros-cnip-rsc
-       workflow_id: cnip.yml,clean.yml
-       branch: main
-       run_conclusions: |
-          failure
-          timed_out
-       save_period: 30
-       save_min_runs_number: 1
-       dry: true
+      - name: Delete workflow runs
+        uses: dmvict/clean-workflow-runs@v1.0.0
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          repo: ixmu/ros-cnip-rsc
+          workflow_id: cnip.yml,clean.yml
+          branch: main
+          run_conclusions: |
+            failure
+            timed_out
+          save_period: 30
+          save_min_runs_number: 1
+          dry: false
