@@ -38,3 +38,31 @@ remove [find list=List_ALL_China]
 :log info ("List_ALL_China_V6更新:"."$ListAllChina"."条")
 ```
 建议手动执行，也可以在/System Scheduler下添加一个脚本定时
+
+---
+
+## ocserv NoRoute 配置
+
+由 `.github/workflows/norange.yml` 在每次列表更新后自动生成，输出到 `ocserv/` 目录。
+
+| 文件 | 条数 | 过覆盖率 |
+|------|------|----------|
+| `ocserv/no-route-ipv4.conf` | ≤ 1000 | ~24% |
+| `ocserv/no-route-ipv6.conf` | ≤ 500 | ~0.8% |
+
+**算法**：对原始 .rsc 列表进行 trie DP 最优 CIDR 聚合，在指定条数限制下最小化过覆盖（非中国 IP 被误加入 bypass 列表）。
+
+**ocserv 格式**：
+```ini
+# IPv4: no-route = <网络地址> <点分掩码>
+# IPv6: no-route = <IPv6地址>/<前缀长度>
+```
+
+在 ocserv.conf 中引入：
+```ini
+# 分路由：中国 IP 不走隧道
+include = /path/to/no-route-ipv4.conf
+include = /path/to/no-route-ipv6.conf
+```
+
+也可手动触发重新生成：**Actions → NoRoute Config → Run workflow**。

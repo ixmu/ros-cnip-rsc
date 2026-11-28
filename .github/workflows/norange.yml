@@ -1,0 +1,45 @@
+name: NoRoute Config
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["ROS CNIP List"]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: norange
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACTION_TOKEN }}
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate ocserv no-route config
+        run: |
+          python3 .github/scripts/norange.py \
+            --target-v4 1000 \
+            --target-v6  500
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update ocserv NoRoute config"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "41898282+github-actions[bot]@users.noreply.github.com"
