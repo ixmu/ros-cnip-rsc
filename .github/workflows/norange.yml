@@ -1,27 +1,27 @@
 name: NoRoute Config
 
 # 触发方式：
-#   1. 手动（Actions → NoRoute Config → Run workflow），可调通用档条目数 / 裁剪权重
+#   1. 手动（Actions → NoRoute Config → Run workflow），可调标准档条目数 / 裁剪权重
 #   2. push：生成器或本工作流变更时自动重建（.github/**）
 #   3. workflow_run：ROS CNIP List 每日更新成功后自动重建
 #      列表数据本身不放在 push paths 里，避免同一次更新触发两次运行。
 #
-# 每次运行生成两套 no-route：
-#   ocserv/            通用档（默认 512 v4 + 384 v6 ≈ 896 条，含手机/PC 全终端）
-#   ocserv/desktop/    桌面档（800 v4 + 512 v6 ≈ 1312 条，桌面客户端路由上限宽松）
+# 每次运行生成两套（IPv4 与 IPv6 表按族分别使用，条数预算各自独立）：
+#   ocserv/          标准档  1000 v4 + 800 v6，全终端可用
+#   ocserv/lite/     精简档  320 v4 + 384 v6，给路由表容量受限的客户端
 on:
   workflow_dispatch:
     inputs:
       target_v4:
-        description: '通用档 IPv4 最大条数'
+        description: '标准档 IPv4 最大条数'
         required: false
-        default: '512'
+        default: '1000'
       target_v6:
-        description: '通用档 IPv6 最大条数'
+        description: '标准档 IPv6 最大条数'
         required: false
-        default: '384'
+        default: '800'
       prune_v4:
-        description: '通用档 IPv4 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
+        description: '标准档 IPv4 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
         required: false
         default: '1'
       prune_v6:
@@ -70,19 +70,17 @@ jobs:
           TARGET_V6: ${{ inputs.target_v6 }}
           PRUNE_V4: ${{ inputs.prune_v4 }}
           PRUNE_V6: ${{ inputs.prune_v6 }}
-          # 桌面档参数固定在下面，需要调整直接改这里的默认值即可。
-          DESKTOP_V4: ''
-          DESKTOP_V6: ''
-          DESKTOP_PRUNE_V4: ''
+          # 精简档参数固定在下面，需要调整直接改这里的默认值即可。
+          LITE_V4: ''
+          LITE_V6: ''
         run: |
           set -euo pipefail
-          TARGET_V4="${TARGET_V4:-512}"
-          TARGET_V6="${TARGET_V6:-384}"
+          TARGET_V4="${TARGET_V4:-1000}"
+          TARGET_V6="${TARGET_V6:-800}"
           PRUNE_V4="${PRUNE_V4:-1}"
           PRUNE_V6="${PRUNE_V6:-0}"
-          DESKTOP_V4="${DESKTOP_V4:-800}"
-          DESKTOP_V6="${DESKTOP_V6:-512}"
-          DESKTOP_PRUNE_V4="${DESKTOP_PRUNE_V4:-2}"
+          LITE_V4="${LITE_V4:-320}"
+          LITE_V6="${LITE_V6:-384}"
           echo "event=${GITHUB_EVENT_NAME}"
 
           gen() {  # $1=out-dir  $2=v4 条数  $3=v6 条数  $4=IPv4 λ  $5=IPv6 λ
@@ -100,10 +98,10 @@ jobs:
             done
           }
 
-          # 通用档：所有终端都能安全加载
-          gen ocserv         "$TARGET_V4"   "$TARGET_V6"         "$PRUNE_V4"          "$PRUNE_V6"
-          # 桌面档：条目更多、更准，桌面客户端用 config-per-group 指到这里
-          gen ocserv/desktop "$DESKTOP_V4" "$DESKTOP_V6" "$DESKTOP_PRUNE_V4" "$PRUNE_V6"
+          # 标准档：条数预算按族独立计算，两个终端平台都能安全加载
+          gen ocserv      "$TARGET_V4" "$TARGET_V6" "$PRUNE_V4" "$PRUNE_V6"
+          # 精简档：路由表容量受限的老客户端用这套
+          gen ocserv/lite "$LITE_V4"   "$LITE_V6"    "$PRUNE_V4" "$PRUNE_V6"
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5

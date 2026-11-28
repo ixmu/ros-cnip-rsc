@@ -25,14 +25,15 @@ Algorithm
    λ = 0 disables pruning (every address must be covered, 100% recall).
    Larger λ keeps more China addresses at the price of more over-coverage.
 
-Defaults are the cross-platform tier: --target-v4 512 / --target-v6 384
-(~896 rules, safe for every ocserv client build, including the Windows,
-Android and iOS ones that cap the number of pushed routes).  With
---prune-v4 1 the DP drops only the tails that cost less to ignore than to
-widen a prefix for, which is what keeps recall high at a low rule count;
-higher λ (2-4) buys precision instead and is meant for the desktop tier.
---prune-v6 defaults to 0 because the IPv6 source is already compact enough
-that pruning only throws away prefixes without buying measurable precision.
+Defaults are the standard tier: --target-v4 1000 / --target-v6 800.  The
+IPv4 and IPv6 files are meant to be included per address family, so each
+list carries its own rule budget instead of sharing one combined limit.
+With --prune-v4 1 the DP drops only the tails that cost less to ignore than
+to widen a prefix for, which is what keeps precision above 99% at a size
+even the most limited mobile clients handle; higher λ (2-4) trades precision
+for coverage.  --prune-v6 defaults to 0 because the IPv6 source is already
+compact enough that pruning only throws away prefixes without buying
+measurable precision.
 
 Output
 ------
@@ -342,10 +343,10 @@ def main() -> None:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    ap.add_argument('--target-v4', type=int, default=512, metavar='N',
-                    help='IPv4 max rules (default: 512)')
-    ap.add_argument('--target-v6', type=int, default=384, metavar='N',
-                    help='IPv6 max rules (default: 384)')
+    ap.add_argument('--target-v4', type=int, default=1000, metavar='N',
+                    help='IPv4 max rules (default: 1000)')
+    ap.add_argument('--target-v6', type=int, default=800, metavar='N',
+                    help='IPv6 max rules (default: 800)')
     ap.add_argument('--prune-v4', type=int, default=1, metavar='λ',
                     dest='prune_v4',
                     help='IPv4 cost of one dropped China address, '
