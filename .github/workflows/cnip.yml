@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.ACTION_TOKEN }}
+          token: ${{ secrets.ACTION_TOKEN || secrets.GH_TOKEN }}
 
       - name: Fetch CNIP lists
         run: |
