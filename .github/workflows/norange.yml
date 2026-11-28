@@ -2,6 +2,23 @@ name: NoRoute Config
 
 on:
   workflow_dispatch:
+    inputs:
+      target_v4:
+        description: 'IPv4 最大条数'
+        required: false
+        default: '800'
+      target_v6:
+        description: 'IPv6 最大条数'
+        required: false
+        default: '800'
+      prune_v4:
+        description: 'IPv4 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
+        required: false
+        default: '4'
+      prune_v6:
+        description: 'IPv6 裁剪权重 λ（0 = 不裁剪，保证 100% 覆盖）'
+        required: false
+        default: '0'
   workflow_run:
     workflows: ["ROS CNIP List"]
     types: [completed]
@@ -33,9 +50,14 @@ jobs:
 
       - name: Generate ocserv no-route config
         run: |
+          set -euo pipefail
           python3 .github/scripts/norange.py \
-            --target-v4 1000 \
-            --target-v6  500
+            --target-v4 "${{ inputs.target_v4 || 800 }}" \
+            --target-v6 "${{ inputs.target_v6 || 800 }}" \
+            --prune-v4  "${{ inputs.prune_v4  || 4 }}" \
+            --prune-v6  "${{ inputs.prune_v6  || 0 }}"
+          head -6 ocserv/no-route-ipv4.conf
+          head -6 ocserv/no-route-ipv6.conf
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5

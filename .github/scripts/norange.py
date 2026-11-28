@@ -3,30 +3,50 @@
 norange.py – generate ocserv no-route configuration from China IP lists.
 
 Reads MikroTik .rsc address-list files and produces ocserv-compatible
-config snippets using trie-based DP to minimise over-coverage for a
-given maximum rule count.
+config snippets using a trie DP that minimises routing error for a given
+maximum rule count.
 
 Algorithm
 ---------
-1. Parse .rsc → IPv4 / IPv6 network lists.
-2. Exact collapse via ipaddress.collapse_addresses (zero IP loss).
-3. Trie DP: for every prefix-tree node, compute dp[k] = minimum
-   over-coverage (extra IPs outside China) achievable when allocating
-   exactly k CIDR rules to that subtree.
-   • dp[1]  = node_size − covered   (cover whole subtree with one rule)
-   • dp[k]  = min over k0+k1=k of left.dp[k0] + right.dp[k1]
-4. Trace back dp table to extract the chosen prefix set.
+1. Parse .rsc → IPv4 / IPv6 network lists, exact collapse
+   (ipaddress.collapse_addresses, zero IP loss).
+2. Trie DP: for every prefix-tree node compute
+
+       dp[k] = minimum cost of covering that subtree with exactly k rules
+
+   where cost = (over-covered IPs) + λ · (dropped China IPs)
+
+   Three choices per node:
+     • dp[0] = λ · covered        → drop the whole subtree (prune, 0 rules)
+     • dp[1] = node_size−covered  → collapse the subtree into one prefix
+     • dp[k] = min over k0+k1=k   → split between the two children
+                                    (k0 or k1 may be 0 = prune that side)
+
+   λ = 0 disables pruning (every address must be covered, 100% recall).
+   Larger λ keeps more China addresses at the price of more over-coverage.
+
+λ is picked per family: --prune-v4 defaults to 4 (worth it, the IPv4 list is
+made of thousands of small fragments), --prune-v6 defaults to 0 because the
+IPv6 source is already compact enough that pruning only throws away prefixes
+without buying measurable precision.
 
 Output
 ------
-  no-route = <ip> <dotted_netmask>      (IPv4, ocserv space format)
-  no-route = <ip6>/<prefix_len>         (IPv6, ocserv slash format)
+  no-route = <ip>/<dotted_netmask>      (IPv4)
+  no-route = <ip6>/<prefix_len>         (IPv6)
+
+ocserv's ip_route_sanity_check() requires 'address/prefix' or
+'address/dotted-netmask' for every route/no-route entry; a space-separated
+netmask is rejected.  IPv4 therefore emits the dotted form (same style as
+route lists commonly seen in the field), IPv6 the prefix length, where a
+dotted mask would be unrepresentative (IPv6 masks are not contiguous).
 
 Usage
 -----
   python3 norange.py [--target-v4 N] [--target-v6 N]
-                     [--in-v4 FILE] [--in-v6 FILE]
-                     [--out-dir DIR]
+                     [--prune-v4 λ4] [--prune-v6 λ6]
+                     [--in-v4 FILE] [--in-v6 FILE] [--out-dir DIR]
+                     [--[no-]include-private]
 """
 from __future__ import annotations
 
@@ -35,25 +55,31 @@ import ipaddress
 import sys
 import time
 from pathlib import Path
-from typing import Any
-
-# --------------------------------------------------------------------------- #
-#  Trie node
-# --------------------------------------------------------------------------- #
 
 INF = float('inf')
 
+# Extra ranges that should always bypass the tunnel; they are appended
+# verbatim and do not count against the rule budget.
+PRIVATE_V4 = ('10.0.0.0/8', '100.64.0.0/10', '127.0.0.0/8', '169.254.0.0/16',
+              '172.16.0.0/12', '192.168.0.0/16', '224.0.0.0/4', '240.0.0.0/4')
+PRIVATE_V6 = ('::1/128', 'fc00::/7', 'fe80::/10', 'ff00::/8')
+
+
+# --------------------------------------------------------------------------- #
+#  Trie
+# --------------------------------------------------------------------------- #
 
 class _Node:
-    __slots__ = ('c0', 'c1', 'leaf', 'cnt', 'cov', 'dp')
+    __slots__ = ('c0', 'c1', 'exact', 'cnt', 'cov', 'dp', 'act')
 
     def __init__(self) -> None:
         self.c0: _Node | None = None
         self.c1: _Node | None = None
-        self.leaf: bool = False
-        self.cnt: int = 0    # entries in subtree
-        self.cov: int = 0    # total IPs occupied by subtree entries
-        self.dp: list[int | float] | None = None
+        self.exact: bool = False   # node itself is an entry of the source list
+        self.cnt: int = 0          # number of source entries in subtree
+        self.cov: int = 0          # IPs actually covered by those entries
+        self.dp: list | None = None
+        self.act: list | None = None
 
 
 def _insert(root: _Node, addr: int, plen: int, bits: int) -> None:
@@ -74,84 +100,104 @@ def _insert(root: _Node, addr: int, plen: int, bits: int) -> None:
             node = node.c1
         node.cnt += 1
         node.cov += size
-    node.leaf = True
+    node.exact = True
 
 
-def _dp(node: _Node, plen: int, bits: int, K: int) -> None:
-    """Bottom-up DP.  Fills node.dp[0..min(cnt,K)] (dp[0]=INF unused)."""
-    if node.c0:
-        _dp(node.c0, plen + 1, bits, K)
-    if node.c1:
-        _dp(node.c1, plen + 1, bits, K)
+def _dp(node: _Node, plen: int, bits: int, K: int, lam: int) -> None:
+    """Bottom-up DP; fills node.dp[0..min(cnt,K)] and the matching actions."""
+    for child in (node.c0, node.c1):
+        if child is not None:
+            _dp(child, plen + 1, bits, K, lam)
 
     M = min(node.cnt, K)
-    dp: list[int | float] = [INF] * (M + 1)
+    dp: list = [INF] * (M + 1)
+    act: list = [None] * (M + 1)
 
-    # Option: cover whole subtree with this single node
-    dp[1] = (1 << (bits - plen)) - node.cov
-    if node.leaf and node.c0 is None and node.c1 is None:
-        dp[1] = 0  # exact /L entry, zero waste
+    if lam > 0:                      # prune: spend no rule on this subtree
+        dp[0] = lam * node.cov
+        act[0] = ('prune',)
 
-    d0 = node.c0.dp if node.c0 else None
-    d1 = node.c1.dp if node.c1 else None
+    if M >= 1:                       # collapse: one prefix for the whole subtree
+        dp[1] = (1 << (bits - plen)) - node.cov
+        act[1] = ('cover',)
+        if node.exact and node.c0 is None and node.c1 is None:
+            dp[1] = 0                # already an exact entry, zero waste
 
-    if d0 and d1:
-        # split budget k = k0 + k1 across both children
-        for k0 in range(1, len(d0)):
-            v0 = d0[k0]
-            if v0 == INF:
+    d0 = node.c0.dp if node.c0 is not None else None
+    d1 = node.c1.dp if node.c1 is not None else None
+
+    if d0 is not None and d1 is not None:
+        for k0 in range(0, min(len(d0) - 1, M) + 1):
+            if d0[k0] == INF:
                 continue
-            max_k1 = min(len(d1) - 1, M - k0)
-            for k1 in range(1, max_k1 + 1):
+            for k1 in range(0, min(len(d1) - 1, M - k0) + 1):
+                if k1 == 0 and k0 == 0 or d1[k1] == INF:
+                    continue
                 k = k0 + k1
-                v = v0 + d1[k1]
-                if v < dp[k]:
-                    dp[k] = v
-    elif d0:
-        for k in range(1, min(len(d0), M + 1)):
-            if d0[k] < dp[k]:
-                dp[k] = d0[k]
-    elif d1:
-        for k in range(1, min(len(d1), M + 1)):
-            if d1[k] < dp[k]:
-                dp[k] = d1[k]
+                c = d0[k0] + d1[k1]
+                if c < dp[k]:
+                    dp[k] = c
+                    act[k] = ('split', k0)
+    elif d0 is not None or d1 is not None:
+        child = node.c0 if d0 is not None else node.c1
+        for k in range(1, min(len(child.dp), M + 1)):
+            if child.dp[k] < dp[k]:  # delegate the rule to the populated half
+                dp[k] = child.dp[k]
+                act[k] = ('via',)
 
     node.dp = dp
+    node.act = act
 
 
-def _extract(node: _Node, k: int, plen: int, prefix: int,
-             bits: int, out: list[tuple[int, int]]) -> None:
-    """Walk DP table to collect chosen (network_int, prefix_len) pairs."""
-    c0, c1 = node.c0, node.c1
-    if c0 is None and c1 is None:
+def _extract(node: _Node, k: int, plen: int, prefix: int, bits: int,
+             out: list) -> None:
+    """Walk the action table recorded by _dp()."""
+    if node is None or k >= len(node.act):
+        return
+    action = node.act[k]
+    if action is None or action[0] == 'prune':
+        return
+    if action[0] == 'cover' or (node.c0 is None and node.c1 is None):
         out.append((prefix << (bits - plen), plen))
-        return
+    elif action[0] == 'via':
+        child = node.c0 if node.c1 is None else node.c1
+        bit = 1 if node.c1 is not None else 0
+        _extract(child, k, plen + 1, (prefix << 1) | bit, bits, out)
+    else:                                    # 'split'
+        k0 = action[1]
+        _extract(node.c0, k0, plen + 1, prefix << 1, bits, out)
+        _extract(node.c1, k - k0, plen + 1, (prefix << 1) | 1, bits, out)
 
-    if c0 and c1:
-        d0, d1 = c0.dp, c1.dp
-        for k0 in range(1, min(k, len(d0))):
-            k1 = k - k0
-            if k1 >= 1 and k1 < len(d1) and d0[k0] + d1[k1] == node.dp[k]:
-                _extract(c0, k0, plen + 1, prefix << 1, bits, out)
-                _extract(c1, k1, plen + 1, (prefix << 1) | 1, bits, out)
-                return
-    elif c0:
-        _extract(c0, k, plen + 1, prefix << 1, bits, out)
-        return
-    elif c1:
-        _extract(c1, k, plen + 1, (prefix << 1) | 1, bits, out)
-        return
 
-    # fallback: cover with this node
-    out.append((prefix << (bits - plen), plen))
+def trie_compress(nets: list, target: int, bits: int, lam: int = 0) -> list:
+    """Compress *nets* (exact-collapsed) to at most *target* CIDR rules."""
+    root = _Node()
+    for n in nets:
+        _insert(root, int(n.network_address), n.prefixlen, bits)
+
+    if root.cnt <= target:
+        return sorted(nets)
+
+    _dp(root, 0, bits, target, lam)
+    K = min(target, len(root.dp) - 1)
+    feasible = [k for k in range(1, K + 1) if root.dp[k] < INF]
+    if not feasible or root.dp[0] <= min(root.dp[k] for k in feasible):
+        return []
+
+    k_best = min(feasible, key=lambda k: (root.dp[k], -k))
+    chosen: list = []
+    _extract(root, k_best, 0, 0, bits, chosen)
+
+    cls = ipaddress.IPv4Network if bits == 32 else ipaddress.IPv6Network
+    return sorted(cls((addr, plen), strict=False) for addr, plen in chosen)
 
 
 # --------------------------------------------------------------------------- #
-#  Parsing
+#  Parsing / metrics
 # --------------------------------------------------------------------------- #
 
 def parse_rsc(path: Path) -> list:
-    """Return list of ipaddress objects from a MikroTik .rsc address-list."""
+    """Return the exact-collapsed network list contained in a .rsc file."""
     nets: list = []
     for raw in path.read_text(encoding='utf-8').splitlines():
         if not raw.startswith('add address='):
@@ -164,53 +210,114 @@ def parse_rsc(path: Path) -> list:
     return sorted(ipaddress.collapse_addresses(nets))
 
 
-# --------------------------------------------------------------------------- #
-#  Core compression
-# --------------------------------------------------------------------------- #
+def _intervals(nets: list) -> list:
+    ivs = sorted((int(n.network_address), int(n.broadcast_address) + 1)
+                 for n in nets)
+    out: list = []
+    for start, end in ivs:
+        if out and start <= out[-1][1]:
+            if end > out[-1][1]:
+                out[-1][1] = end
+        else:
+            out.append([start, end])
+    return out
 
-def trie_compress(nets: list, target: int, bits: int) -> list:
-    """Compress *nets* (already exact-collapsed) to at most *target* entries."""
-    root = _Node()
-    for n in nets:
-        _insert(root, int(n.network_address), n.prefixlen, bits)
 
-    if root.cnt <= target:
-        return sorted(nets)
+def _size(ivs: list) -> int:
+    return sum(e - s for s, e in ivs)
 
-    _dp(root, 0, bits, target)
-    K = min(target, len(root.dp) - 1)
 
-    chosen: list[tuple[int, int]] = []
-    _extract(root, K, 0, 0, bits, chosen)
+def _overlap(a: list, b: list) -> int:
+    i = j = total = 0
+    while i < len(a) and j < len(b):
+        start = max(a[i][0], b[j][0])
+        end = min(a[i][1], b[j][1])
+        if end > start:
+            total += end - start
+        if a[i][1] < b[j][1]:
+            i += 1
+        else:
+            j += 1
+    return total
 
-    cls = ipaddress.IPv4Network if bits == 32 else ipaddress.IPv6Network
-    return sorted(cls((addr, plen), strict=False) for addr, plen in chosen)
+
+def human(n: float) -> str:
+    """Compact address count – IPv6 totals reach 1e33."""
+    if n >= 1e15:                       # no useful unit for IPv6 sums
+        return f'{float(n):.3g}'
+    for unit in ('', 'K', 'M', 'G', 'T', 'P'):
+        if n < 1000:
+            return f'{n:,.0f}' if unit == '' else f'{n:.1f}{unit}'
+        n /= 1000.0
+    return f'{n:.1f}P'
+
+
+def metrics(src: list, out: list) -> dict:
+    """Precision / recall of *out* measured against the source list *src*.
+
+    Every emitted rule is a prefix-tree node, so it is always a superset of
+    the source entries it stands for: a source entry is either covered in
+    full or not at all, which makes the entry-level count meaningful next
+    to the address-weighted one.
+    """
+    truth, cand = _intervals(src), _intervals(out)
+    total, covered = _size(truth), _size(cand)
+    hit = _overlap(truth, cand)
+    entries_hit = sum(
+        1 for n in src
+        if any(s <= int(n.network_address) and int(n.broadcast_address) + 1 <= e
+               for s, e in cand))
+    return {
+        'src_ips': total,
+        'out_ips': covered,
+        'hit': hit,
+        'miss': total - hit,
+        'over': covered - hit,
+        'recall': 100.0 * hit / total if total else 100.0,
+        'precision': 100.0 * hit / covered if covered else 0.0,
+        'extra_pct': 100.0 * (covered - hit) / total if total else 0.0,
+        'entries_total': len(src),
+        'entries_hit': entries_hit,
+        'entries_pct': 100.0 * entries_hit / len(src) if src else 100.0,
+    }
 
 
 # --------------------------------------------------------------------------- #
 #  Output
 # --------------------------------------------------------------------------- #
 
-def fmt_v4_line(net: ipaddress.IPv4Network) -> str:
-    """ocserv IPv4 no-route: '<ip> <dotted_netmask>'."""
-    return f'no-route = {net.network_address} {net.netmask}\n'
+def fmt_line(net) -> str:
+    """ocserv no-route line, '<addr>/<mask>' for both families."""
+    if net.version == 6:
+        return f'no-route = {net.network_address}/{net.prefixlen}\n'
+    return f'no-route = {net.network_address}/{net.netmask}\n'
 
 
-def fmt_v6_line(net: ipaddress.IPv6Network) -> str:
-    """ocserv IPv6 no-route: '<ip6>/<prefix_len>'."""
-    return f'no-route = {net.network_address}/{net.prefixlen}\n'
-
-
-def report(nets_in: list, nets_out: list, label: str, elapsed: float) -> None:
-    """Print compression statistics to stderr."""
-    orig = sum(n.num_addresses for n in nets_in)
-    comp = sum(n.num_addresses for n in nets_out)
-    over = (comp - orig) / orig * 100 if orig else 0
-    print(
-        f'  {label}  {len(nets_in)} → {len(nets_out)} rules'
-        f'  [{elapsed:.1f}s]  over-coverage={over:.1f}%',
-        file=sys.stderr,
+def emit(out_path: Path, comp: list, private: list, label: str,
+         src: list, elapsed: float, lam: int, target: int) -> dict:
+    m = metrics(src, comp)
+    header = (
+        f'# ocserv no-route – {label}\n'
+        f'# source      : {len(src)} entries / {human(m["src_ips"])} addresses\n'
+        f'# rules       : {len(comp)} (limit {target}, prune weight {lam})\n'
+        f'# china recall: {m["recall"]:.2f}%   precision: {m["precision"]:.2f}%'
+        f'   over-coverage: {m["extra_pct"]:.1f}%\n'
+        f'# entries kept: {m["entries_hit"]}/{m["entries_total"]}'
+        f' ({m["entries_pct"]:.1f}%)\n'
+        f'# generated   : .github/scripts/norange.py\n'
     )
+    body = ''.join(fmt_line(n) for n in comp)
+    if private:
+        body += '\n# local / reserved ranges\n' + ''.join(
+            fmt_line(n) for n in private)
+    out_path.write_text(header + body, encoding='utf-8')
+    print(f'  {label}: {len(src)} → {len(comp)} rules'
+          f'  recall={m["recall"]:.2f}%  precision={m["precision"]:.2f}%'
+          f'  over={m["extra_pct"]:.1f}%  entries={m["entries_hit"]}'
+          f'/{m["entries_total"]}  miss={human(m["miss"])} IP  [{elapsed:.1f}s]',
+          file=sys.stderr)
+    print(f'  → {out_path}', file=sys.stderr)
+    return m
 
 
 # --------------------------------------------------------------------------- #
@@ -222,50 +329,48 @@ def main() -> None:
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    ap.add_argument('--target-v4', type=int, default=1000,
-                    metavar='N', help='IPv4 max rules (default: 1000)')
-    ap.add_argument('--target-v6', type=int, default=500,
-                    metavar='N', help='IPv6 max rules (default: 500)')
-    ap.add_argument('--in-v4', default='all_china.rsc',
-                    metavar='FILE', help='IPv4 .rsc source (default: all_china.rsc)')
-    ap.add_argument('--in-v6', default='all_china_v6.rsc',
-                    metavar='FILE', help='IPv6 .rsc source (default: all_china_v6.rsc)')
-    ap.add_argument('--out-dir', default='ocserv',
-                    metavar='DIR', help='output directory (default: ocserv/)')
+    ap.add_argument('--target-v4', type=int, default=800, metavar='N',
+                    help='IPv4 max rules (default: 800)')
+    ap.add_argument('--target-v6', type=int, default=800, metavar='N',
+                    help='IPv6 max rules (default: 800)')
+    ap.add_argument('--prune-v4', type=int, default=4, metavar='λ',
+                    dest='prune_v4',
+                    help='IPv4 cost of one dropped China address, '
+                         '0 = never prune (default: 4)')
+    ap.add_argument('--prune-v6', type=int, default=0, metavar='λ',
+                    dest='prune_v6',
+                    help='IPv6 cost of one dropped China address, '
+                         '0 = never prune (default: 0)')
+    ap.add_argument('--in-v4', default='all_china.rsc', metavar='FILE',
+                    help='IPv4 .rsc source (default: all_china.rsc)')
+    ap.add_argument('--in-v6', default='all_china_v6.rsc', metavar='FILE',
+                    help='IPv6 .rsc source (default: all_china_v6.rsc)')
+    ap.add_argument('--out-dir', default='ocserv', metavar='DIR',
+                    help='output directory (default: ocserv/)')
+    ap.add_argument('--no-include-private', dest='include_private',
+                    action='store_false',
+                    help='do not append local/reserved bypass ranges')
+    ap.set_defaults(include_private=True)
     args = ap.parse_args()
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(exist_ok=True)
 
-    # IPv4 ------------------------------------------------------------------
-    print(f'IPv4: reading {args.in_v4}', file=sys.stderr)
-    nets4 = parse_rsc(Path(args.in_v4))
-    print(f'  collapsed exact: {len(nets4)} entries', file=sys.stderr)
-    t0 = time.perf_counter()
-    comp4 = trie_compress(nets4, args.target_v4, 32)
-    report(nets4, comp4, 'IPv4', time.perf_counter() - t0)
-    (out_dir / 'no-route-ipv4.conf').write_text(
-        '# ocserv no-route – China IPv4\n'
-        f'# rules: {len(comp4)}\n'
-        + ''.join(fmt_v4_line(n) for n in comp4),
-        encoding='utf-8',
-    )
-    print(f'  → {out_dir / "no-route-ipv4.conf"}', file=sys.stderr)
-
-    # IPv6 ------------------------------------------------------------------
-    print(f'IPv6: reading {args.in_v6}', file=sys.stderr)
-    nets6 = parse_rsc(Path(args.in_v6))
-    print(f'  collapsed exact: {len(nets6)} entries', file=sys.stderr)
-    t0 = time.perf_counter()
-    comp6 = trie_compress(nets6, args.target_v6, 128)
-    report(nets6, comp6, 'IPv6', time.perf_counter() - t0)
-    (out_dir / 'no-route-ipv6.conf').write_text(
-        '# ocserv no-route – China IPv6\n'
-        f'# rules: {len(comp6)}\n'
-        + ''.join(fmt_v6_line(n) for n in comp6),
-        encoding='utf-8',
-    )
-    print(f'  → {out_dir / "no-route-ipv6.conf"}', file=sys.stderr)
+    for fam, src_path, target, bits, name, fname, priv, lam in (
+        ('IPv4', args.in_v4, args.target_v4, 32, 'China IPv4',
+         'no-route-ipv4.conf', PRIVATE_V4, args.prune_v4),
+        ('IPv6', args.in_v6, args.target_v6, 128, 'China IPv6',
+         'no-route-ipv6.conf', PRIVATE_V6, args.prune_v6),
+    ):
+        print(f'{fam}: reading {src_path}', file=sys.stderr)
+        src = parse_rsc(Path(src_path))
+        print(f'  exact collapse: {len(src)} entries', file=sys.stderr)
+        t0 = time.perf_counter()
+        comp = trie_compress(src, target, bits, lam)
+        private = ([ipaddress.ip_network(c) for c in priv]
+                   if args.include_private else [])
+        emit(out_dir / fname, comp, private, name, src,
+             time.perf_counter() - t0, lam, target)
 
 
 if __name__ == '__main__':
