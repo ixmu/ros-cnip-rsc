@@ -51,6 +51,8 @@ remove [find list=List_ALL_China]
 
 生成结果只提交到 `ocserv/`，不在 push 的 `paths` 过滤范围内，因此不会形成自触发循环。
 
+推送产物使用仓库密钥 `ACTION_TOKEN`（或 `GH_TOKEN`，二者任一即可）；两者都没配置时自动退回 `GITHUB_TOKEN`，此时需要把 Settings → Actions → General → Workflow permissions 设为 **Read and write**。`Clean Workflows` 每 7 天清理一次三个工作流中失败/超时的运行记录（成功记录保留 7 天以上的部分由 GitHub 自身的 90 天策略管理）。
+
 | 文件 | 规则数 | 中国IP覆盖率 | 精确率 | 超覆盖 |
 |------|-------:|-------------:|-------:|-------:|
 | `ocserv/no-route-ipv4.conf` | 800（另加 8 条本地段） | 99.00% | 97.08% | 3.0% |
