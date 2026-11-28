@@ -71,8 +71,8 @@ remove [find list=List_ALL_China]
 
 ### 为什么默认是 512 + 384（约 900 条）
 
-- **服务端没有条数上限**：`config.c` 对 `no-route` 只做语法检查、不限量，`send_routes()`（`worker-vpn.c`）逐条拼 `X-CSTP-Split-Exclude` 头。条目多只会线性增大下发体积，ocserv 4.10 与最新版本在这点上没有差别。
-- **约束在客户端**：Android 平台 VPN profile 的硬上限是 128 KB（AOSP `Vpn.java`：`MAX_VPN_PROFILE_SIZE_BYTES = 1 << 17`，超限直接报 `Profile too big`）。按实测约 50 B/条折算，纯路由可容约 2600 条；通用档 908 条只占 43 KB，给证书、DNS、域名留出充足余量。iOS / Android 上的 AnyConnect 系客户端在移动端的处理开销明显高于桌面端，官方未公布固定条数上限，这里按业内经验把「全终端安全线」定在 1000 条以内。
+- **服务端没有条数上限**：`config.c` 对 `no-route` 只做语法检查、不限量，`send_routes()`（`worker-vpn.c`）逐条拼 `X-CSTP-Split-Exclude` 头。条目多只会线性增大下发体积，ocserv 老版本（0.4.x）与 1.x 最新版在这点上没有差别，客户端也不用担心 ocserv 版本。
+- **约束在客户端**：Android 平台 VPN profile 的硬上限是 128 KB（AOSP `Vpn.java`：`MAX_VPN_PROFILE_SIZE_BYTES = 1 << 17`，超限直接报 `Profile too big`）。按实测约 50 B/条折算，纯路由可容约 2600 条；通用档 908 条只占 43 KB，给证书、DNS、域名留出充足余量。Cisco AnyConnect / Secure Client 4.10 及更新版本（Windows、macOS、Linux）没有公布 split exclude 的固定条数上限，走的是同一条 `X-CSTP-Split-Exclude` 解析路径，4.10 能收的路由数不会比新版少；移动端（iOS / Android）的 AnyConnect 系 App 处理大路由表的开销明显高于桌面端，官方又没给出保证值，因此按业内经验把「全终端安全线」定在 1000 条以内。
 - **精度收益的拐点就在这里**：IPv6 精确率从 320 条的 85.9% 跳到 384 条的 97.7%，之后每加 64 条只涨约 1 个点；IPv4 在 λ=1 下 512 → 800 条只多换 3.7 个点覆盖率。低于 384 / 512 会明显丢精度，高于 1300 只是买边际收益、同时把移动端余量吃光。
 - 结论：**通用档 512 v4 + 384 v6 ≈ 900 条**；桌面 / 路由器客户端用 `config-per-group` 指到 `ocserv/desktop/`（1324 条）。移动端占比高的服务可把通用档压到 320 条（λ=1 为 88.76% / 96.39%），手动运行时填 `target_v4=320` 即可。
 
@@ -133,7 +133,7 @@ no-route = 1.12.0.0/14
 no-route = 2001:250::/30
 ```
 
-ocserv 的 route/no-route 只接受 `地址/前缀` 或 `地址/点分掩码` 两种写法（空格分隔的掩码会被判非法并丢弃）。两种写法解析后的路由集合完全相同，对准确率没有影响，CIDR 只带来两点实际好处：文件小 26%，以及可直接复制到 iptables / ipset / nftables / RouterOS。上游解析代码 `src/ip-util.c`（master 的 `ip_route_sanity_check()`、1.3.0 的 `ipv4_network_to_strmask()`）都会把数字前缀在内部转换成点分掩码，因此 ocserv 4.10 这类老版本同样可用。需要点分掩码时加 `--ipv4-format netmask`。
+ocserv 的 route/no-route 只接受 `地址/前缀` 或 `地址/点分掩码` 两种写法（空格分隔的掩码会被判非法并丢弃）。两种写法解析后的路由集合完全相同，对准确率没有影响，CIDR 只带来两点实际好处：文件小 26%，以及可直接复制到 iptables / ipset / nftables / RouterOS。上游解析代码 `src/ip-util.c`（master 的 `ip_route_sanity_check()`、1.3.0 的 `ipv4_network_to_strmask()`）都会把数字前缀在内部转换成点分掩码，因此老版本 ocserv 同样可用。需要点分掩码时加 `--ipv4-format netmask`。
 
 全局配置（所有用户使用通用档）：
 
