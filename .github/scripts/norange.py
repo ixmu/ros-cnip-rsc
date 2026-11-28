@@ -32,14 +32,18 @@ without buying measurable precision.
 
 Output
 ------
-  no-route = <ip>/<dotted_netmask>      (IPv4)
+  no-route = <ip>/<prefix_len>          (IPv4, CIDR, the default)
   no-route = <ip6>/<prefix_len>         (IPv6)
+  no-route = <ip>/<dotted_netmask>      (IPv4 with --ipv4-format netmask)
 
-ocserv's ip_route_sanity_check() requires 'address/prefix' or
-'address/dotted-netmask' for every route/no-route entry; a space-separated
-netmask is rejected.  IPv4 therefore emits the dotted form (same style as
-route lists commonly seen in the field), IPv6 the prefix length, where a
-dotted mask would be unrepresentative (IPv6 masks are not contiguous).
+ocserv requires 'address/prefix' or 'address/dotted-netmask' for every
+route/no-route entry and rejects a space-separated netmask.  Both IPv4
+forms reach the same routing set; CIDR is the default because it is ~25%
+shorter, reads better, and drops straight into iptables/ipset/nftables or
+RouterOS, while the dotted form only exists for compatibility with tools
+that insist on it.  Verified against the upstream parser: ip_route_sanity_check()
+in src/ip-util.c on master and ipv4_network_to_strmask() in 1.3.0 both
+convert a numeric prefix into the dotted mask internally.
 
 Usage
 -----
@@ -286,16 +290,20 @@ def metrics(src: list, out: list) -> dict:
 #  Output
 # --------------------------------------------------------------------------- #
 
-def fmt_line(net) -> str:
-    """ocserv no-route line, '<addr>/<mask>' for both families."""
+def fmt_line(net, v4_fmt: str = 'cidr') -> str:
+    """ocserv no-route line, '<addr>/<prefix>' (or '<addr>/<netmask>')."""
     if net.version == 6:
         return f'no-route = {net.network_address}/{net.prefixlen}\n'
-    return f'no-route = {net.network_address}/{net.netmask}\n'
+    suffix = str(net.netmask) if v4_fmt == 'netmask' else str(net.prefixlen)
+    return f'no-route = {net.network_address}/{suffix}\n'
 
 
 def emit(out_path: Path, comp: list, private: list, label: str,
-         src: list, elapsed: float, lam: int, target: int) -> dict:
+         src: list, elapsed: float, lam: int, target: int,
+         v4_fmt: str = 'cidr') -> dict:
     m = metrics(src, comp)
+    fmt_note = ('# format      : dotted netmask' if v4_fmt == 'netmask'
+                else '# format      : CIDR')
     header = (
         f'# ocserv no-route – {label}\n'
         f'# source      : {len(src)} entries / {human(m["src_ips"])} addresses\n'
@@ -303,13 +311,14 @@ def emit(out_path: Path, comp: list, private: list, label: str,
         f'# china recall: {m["recall"]:.2f}%   precision: {m["precision"]:.2f}%'
         f'   over-coverage: {m["extra_pct"]:.1f}%\n'
         f'# entries kept: {m["entries_hit"]}/{m["entries_total"]}'
-        f' ({m["entries_pct"]:.1f}%)\n'
+        f' ({m["entries_pct"]:.1f}%)\n' +
+        fmt_note + '  (no-route = <address>/<mask or prefix>)\n' +
         f'# generated   : .github/scripts/norange.py\n'
     )
-    body = ''.join(fmt_line(n) for n in comp)
+    body = ''.join(fmt_line(n, v4_fmt) for n in comp)
     if private:
         body += '\n# local / reserved ranges\n' + ''.join(
-            fmt_line(n) for n in private)
+            fmt_line(n, v4_fmt) for n in private)
     out_path.write_text(header + body, encoding='utf-8')
     print(f'  {label}: {len(src)} → {len(comp)} rules'
           f'  recall={m["recall"]:.2f}%  precision={m["precision"]:.2f}%'
@@ -347,6 +356,9 @@ def main() -> None:
                     help='IPv6 .rsc source (default: all_china_v6.rsc)')
     ap.add_argument('--out-dir', default='ocserv', metavar='DIR',
                     help='output directory (default: ocserv/)')
+    ap.add_argument('--ipv4-format', choices=('cidr', 'netmask'),
+                    default='cidr', dest='ipv4_format',
+                    help='IPv4 mask notation (default: cidr)')
     ap.add_argument('--no-include-private', dest='include_private',
                     action='store_false',
                     help='do not append local/reserved bypass ranges')
@@ -370,7 +382,7 @@ def main() -> None:
         private = ([ipaddress.ip_network(c) for c in priv]
                    if args.include_private else [])
         emit(out_dir / fname, comp, private, name, src,
-             time.perf_counter() - t0, lam, target)
+             time.perf_counter() - t0, lam, target, args.ipv4_format)
 
 
 if __name__ == '__main__':
